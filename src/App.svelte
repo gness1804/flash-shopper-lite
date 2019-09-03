@@ -27,6 +27,11 @@
 	#app {
 		text-align: center;
 	}
+
+	:global(button:hover) {
+		cursor: pointer;
+		font-weight: 700;
+	}
 </style>
 
 <div id="app">

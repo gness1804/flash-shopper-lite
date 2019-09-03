@@ -48,6 +48,11 @@
     margin: 0 auto 10px;
     display: block;
   }
+
+  .item-container-delete-button {
+    background-color: #f00;
+    color: #fff;
+  }
   </style>
 
 <div class="item-container">
@@ -68,7 +73,7 @@
     <input bind:value={newQuantity} placeholder="Enter Quantity." class="item-container-input"/>
     <textarea bind:value={newNote} class="item-container-text-box"></textarea>
   {/if}
-  <button on:click={deleteItem}>
+  <button on:click={deleteItem} class="item-container-delete-button">
     X
   </button>
   <button on:click={toggleEdit}>

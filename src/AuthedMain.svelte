@@ -42,6 +42,14 @@
   updateItemsCookie();
   }
 
+  const deleteAllItems = () => {
+    const warn = confirm('This will delete ALL items! Are you sure?');
+    if (warn) {
+      items.set([]);
+      updateItemsCookie();
+    }
+  }
+
   onMount(() => {
 		updateItemsFromCookie();
 	});
@@ -50,6 +58,11 @@
 <style>
   .authed-main-top-message-container {
     margin-bottom: 40px;
+  }
+
+  .authed-main-delete-all-items-button {
+    background-color: #f00;
+    color: #fff;
   }
 </style>
 
@@ -68,6 +81,9 @@
   <ItemInput on:addItem={addItem}>
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
+  <button on:click={deleteAllItems} disabled={itemsCount === 0} class="authed-main-delete-all-items-button">
+    Delete All Items
+  </button>
   <div class="authed-main-items-container">
     {#each $items as item (item.id)}
       <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
