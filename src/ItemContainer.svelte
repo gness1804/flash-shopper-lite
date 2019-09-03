@@ -14,7 +14,7 @@
     let newQuantity = quantity;
     let newNote = note;
 
-     const dispatch = createEventDispatcher();
+    const dispatch = createEventDispatcher();
 
     const deleteItem = () => {
       dispatch('deleteItem', id);
@@ -35,6 +35,19 @@
   </script>
 
   <style>
+  .item-container {
+    margin-bottom: 30px;
+  }
+
+  .item-container-input {
+    display: block;
+    margin: 0 auto 10px;
+  }
+
+  .item-container-text-box {
+    margin: 0 auto 10px;
+    display: block;
+  }
   </style>
 
 <div class="item-container">
@@ -50,10 +63,10 @@
       <p>Note: {note}</p>
     {/if}
   {:else}
-    <input bind:value={newName} placeholder="Enter Name."/>
-    <input bind:value={newAisle} placeholder="Enter Aisle."/>
-    <input bind:value={newQuantity} placeholder="Enter Quantity."/>
-    <textarea bind:value={newNote}></textarea>
+    <input bind:value={newName} placeholder="Enter Name." class="item-container-input"/>
+    <input bind:value={newAisle} placeholder="Enter Aisle." class="item-container-input"/>
+    <input bind:value={newQuantity} placeholder="Enter Quantity." class="item-container-input"/>
+    <textarea bind:value={newNote} class="item-container-text-box"></textarea>
   {/if}
   <button on:click={deleteItem}>
     X
