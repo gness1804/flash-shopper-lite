@@ -1,8 +1,17 @@
   <script>
+    import { createEventDispatcher } from 'svelte';
+
     export let name;
     export let aisle;
     export let quantity;
     export let note;
+    export let id;
+
+     const dispatch = createEventDispatcher();
+
+    const deleteItem = () => {
+      dispatch('deleteItem', id);
+    }
   </script>
 
   <style>
@@ -19,4 +28,7 @@
   {#if note}
     <p>Note: {note}</p>
   {/if}
+  <button on:click={deleteItem}>
+    X
+  </button>
 </div>

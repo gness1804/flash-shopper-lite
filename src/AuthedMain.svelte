@@ -18,6 +18,12 @@
     updateItemsCookie();
   }
 
+  const deleteItem = ({ detail: id }) => {
+    const newItems = $items.filter(item => item.id !== id);
+    items.set(newItems);
+    updateItemsCookie();
+  }
+
   onMount(() => {
 		const itemsCookie = Cookies.get('svelteItems');
 		if (itemsCookie) {
@@ -49,7 +55,7 @@
   </ItemInput>
   <div class="authed-main-items-container">
     {#each $items as item (item.id)}
-      <ItemContainer {...item} />
+      <ItemContainer {...item} on:deleteItem={deleteItem} />
     {/each}
   </div>
 </div>
