@@ -1,11 +1,14 @@
 <script>
-	export let name;
+	import AuthedMain from './AuthedMain.svelte';
+	let userLoggedIn = false;
 </script>
 
 <style>
-	h1 {
-		color: purple;
-	}
 </style>
 
-<h1>Hello {name}!</h1>
+<h1>Flash Shopper Lite</h1>
+
+{#if userLoggedIn}
+	<AuthedMain />
+{/if}
+
