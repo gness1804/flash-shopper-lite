@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
+  import ItemContainer from './ItemContainer.svelte';
   import { items } from './stores/mainStore';
 
   export let user;
@@ -48,7 +49,7 @@
   </ItemInput>
   <div class="authed-main-items-container">
     {#each $items as item (item.id)}
-      <p>{item.name}</p>
+      <ItemContainer {...item} />
     {/each}
   </div>
 </div>
