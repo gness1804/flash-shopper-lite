@@ -24,13 +24,19 @@
 </script>
 
 <style>
+	#app {
+		text-align: center;
+	}
 </style>
 
-<h1>Flash Shopper Lite</h1>
+<div id="app">
+	<h1>Flash Shopper Lite</h1>
 
-{#if userLoggedIn && user}
-	<AuthedMain user={user} />
-{:else}
-	<LogInView on:logIn={handleLogin} />
-{/if}
+	{#if userLoggedIn && user}
+		<AuthedMain user={user} />
+	{:else}
+		<LogInView on:logIn={handleLogin} />
+	{/if}
+</div>
+
 
