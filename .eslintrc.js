@@ -11,7 +11,7 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: ['airbnb-base'],
+  // extends: ['airbnb-base'],
   // check if imports actually resolve
   // 'settings': {
   //   'import/resolver': {
