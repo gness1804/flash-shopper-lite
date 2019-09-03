@@ -1,4 +1,6 @@
 <script>
+	import { onMount } from 'svelte';
+	import * as Cookies from 'js-cookie';
 	import AuthedMain from './AuthedMain.svelte';
 	import LogInView from './LogInView.svelte';
 
@@ -8,7 +10,17 @@
 	const handleLogin = ({ detail: { user: _user } }) => {
 		user = _user;
 		userLoggedIn = true;
+		Cookies.remove('svelteUser');
+		Cookies.set('svelteUser', user, { expires: 2 });
 	}
+
+	onMount(() => {
+		const userCookie = Cookies.get('svelteUser');
+		if (userCookie) {
+			user = JSON.parse(userCookie);
+			userLoggedIn = true;
+		}
+	});
 </script>
 
 <style>
