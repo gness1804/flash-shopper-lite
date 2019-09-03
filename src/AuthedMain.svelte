@@ -7,10 +7,14 @@
   export let user;
   $: itemsCount = $items.length;
 
+  const updateItemsCookie = () => {
+    Cookies.remove('svelteItems');
+    Cookies.set('svelteItems', $items, { expires: 2 });
+  }
+
   const addItem = ({ detail }) => {
     items.update(_items => [..._items, detail]);
-    Cookies.remove('svelteItems'); // TODO: enhancement: make these two lines fire only if items changes.
-    Cookies.set('svelteItems', $items, { expires: 2 });
+    updateItemsCookie();
   }
 
   onMount(() => {
