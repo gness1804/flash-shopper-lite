@@ -2,21 +2,21 @@
   import { onMount } from 'svelte';
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
+  import { items } from './stores/mainStore';
 
-  let items = [];
   export let user;
-  $: itemsCount = items.length;
+  $: itemsCount = $items.length;
 
   const addItem = ({ detail }) => {
-    items = [...items, detail];
+    items.update(_items => [..._items, detail]);
     Cookies.remove('svelteItems'); // TODO: enhancement: make these two lines fire only if items changes.
-    Cookies.set('svelteItems', items, { expires: 2 });
+    Cookies.set('svelteItems', $items, { expires: 2 });
   }
 
   onMount(() => {
 		const itemsCookie = Cookies.get('svelteItems');
 		if (itemsCookie) {
-			items = JSON.parse(itemsCookie);
+      items.set(JSON.parse(itemsCookie));
 		}
 	});
 </script>
@@ -43,7 +43,7 @@
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
   <div class="authed-main-items-container">
-    {#each items as item (item.id)}
+    {#each $items as item (item.id)}
       <p>{item.name}</p>
     {/each}
   </div>
