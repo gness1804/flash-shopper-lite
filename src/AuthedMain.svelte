@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from 'svelte';
+  import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
 
   let items = [];
@@ -7,7 +9,16 @@
 
   const addItem = ({ detail }) => {
     items = [...items, detail];
+    Cookies.remove('svelteItems');
+    Cookies.set('svelteItems', items, { expires: 2 });
   }
+
+  onMount(() => {
+		const itemsCookie = Cookies.get('svelteItems');
+		if (itemsCookie) {
+			items = JSON.parse(itemsCookie);
+		}
+	});
 </script>
 
 <style>
