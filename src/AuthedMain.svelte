@@ -31,6 +31,17 @@
     updateItemsCookie();
   }
 
+  const updateItem = ({detail}) => {
+    const newItems = $items.map(_item => {
+      if (_item.id === detail.id) {
+        return Object.assign({}, _item, {...detail});
+      }
+      return _item;
+    });
+  items.set(newItems);
+  updateItemsCookie();
+  }
+
   onMount(() => {
 		updateItemsFromCookie();
 	});
@@ -59,7 +70,7 @@
   </ItemInput>
   <div class="authed-main-items-container">
     {#each $items as item (item.id)}
-      <ItemContainer {...item} on:deleteItem={deleteItem} />
+      <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
     {/each}
   </div>
 </div>
