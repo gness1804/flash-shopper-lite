@@ -29,8 +29,7 @@
 <h1>Flash Shopper Lite</h1>
 
 {#if userLoggedIn && user}
-	<AuthedMain />
-	<p>Hello, {user.name}</p>
+	<AuthedMain user={user} />
 {:else}
 	<LogInView on:logIn={handleLogin} />
 {/if}
