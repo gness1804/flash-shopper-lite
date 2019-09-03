@@ -13,6 +13,13 @@
     Cookies.set('svelteItems', $items, { expires: 2 });
   }
 
+  const updateItemsFromCookie = () => {
+    const itemsCookie = Cookies.get('svelteItems');
+		if (itemsCookie) {
+      items.set(JSON.parse(itemsCookie));
+		}
+  }
+
   const addItem = ({ detail }) => {
     items.update(_items => [..._items, detail]);
     updateItemsCookie();
@@ -25,10 +32,7 @@
   }
 
   onMount(() => {
-		const itemsCookie = Cookies.get('svelteItems');
-		if (itemsCookie) {
-      items.set(JSON.parse(itemsCookie));
-		}
+		updateItemsFromCookie();
 	});
 </script>
 
