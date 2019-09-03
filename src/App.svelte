@@ -1,8 +1,14 @@
 <script>
 	import AuthedMain from './AuthedMain.svelte';
 	import LogInView from './LogInView.svelte';
+
 	let userLoggedIn = false;
 	let user = null;
+
+	const handleLogin = ({ detail: { user: _user } }) => {
+		user = _user;
+		userLoggedIn = true;
+	}
 </script>
 
 <style>
@@ -12,7 +18,8 @@
 
 {#if userLoggedIn && user}
 	<AuthedMain />
+	<p>Hello, {user.name}</p>
 {:else}
-	<LogInView />
+	<LogInView on:logIn={handleLogin} />
 {/if}
 
