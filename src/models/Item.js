@@ -4,6 +4,7 @@ class Item {
     this.aisle = opts.aisle;
     this.quantity = opts.quantity;
     this.note = opts.note;
+    this.id = Date.now();
   }
 }
 

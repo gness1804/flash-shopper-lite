@@ -4,6 +4,10 @@
   let items = [];
   export let user;
   $: itemsCount = items.length;
+
+  const addItem = ({ detail }) => {
+    items = [...items, detail];
+  }
 </script>
 
 <style>
@@ -24,8 +28,13 @@
       <p>There are no items in your cart. Please add one now.</p>
     {/if}
   </div>
-  <ItemInput>
+  <ItemInput on:addItem={addItem}>
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
+  <div class="authed-main-items-container">
+    {#each items as item (item.id)}
+      <p>{item.name}</p>
+    {/each}
+  </div>
 </div>
 
