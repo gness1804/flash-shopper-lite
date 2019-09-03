@@ -32,6 +32,10 @@
       }
       editMode = !editMode;
     }
+
+    const toggleInCart = () => {
+      // TODO: build out functionality.
+    }
   </script>
 
   <style>
@@ -49,9 +53,27 @@
     display: block;
   }
 
+  .item-container-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .item-container-delete-button {
     background-color: #f00;
     color: #fff;
+  }
+
+  .item-container-shopping-cart-icon {
+    height: 50px;
+  }
+
+  .icon {
+    margin-right: 8px;
+  }
+
+  .item-container-shopping-cart-icon:hover {
+    cursor: pointer;
   }
   </style>
 
@@ -73,10 +95,13 @@
     <input bind:value={newQuantity} placeholder="Enter Quantity." class="item-container-input"/>
     <textarea bind:value={newNote} class="item-container-text-box"></textarea>
   {/if}
-  <button on:click={deleteItem} class="item-container-delete-button">
-    X
-  </button>
-  <button on:click={toggleEdit}>
-  {editMode ? 'Save' : 'Edit'}
-  </button>
+  <div class="item-container-buttons-container">
+    <button on:click={deleteItem} class="item-container-delete-button icon">
+      X
+    </button>
+    <button on:click={toggleEdit} class="icon">
+    {editMode ? 'Save' : 'Edit'}
+    </button>
+    <img src="shopping_cart.svg" alt="Shopping cart." class="item-container-shopping-cart-icon icon" on:click={toggleInCart}/>
+  </div>
 </div>
