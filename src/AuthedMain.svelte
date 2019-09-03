@@ -9,7 +9,7 @@
 
   const addItem = ({ detail }) => {
     items = [...items, detail];
-    Cookies.remove('svelteItems');
+    Cookies.remove('svelteItems'); // TODO: enhancement: make these two lines fire only if items changes.
     Cookies.set('svelteItems', items, { expires: 2 });
   }
 
