@@ -137,6 +137,18 @@
   }) as item (item.id)}
         <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
       {/each}
+    {:else if sortState === 'date'}
+      {#each $items.sort((a, b) => {
+        if (a.id < b.id) {
+          return -1;
+        }
+        if (a.id > b.id) {
+          return 1;
+        }
+        return 0;
+  }) as item (item.id)}
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
+      {/each}
     {/if}
   </div>
 </div>
