@@ -7,6 +7,7 @@
     export let aisle;
     export let quantity;
     export let note;
+    export let inCart;
     export let id;
 
     let newName = name;
@@ -34,7 +35,10 @@
     }
 
     const toggleInCart = () => {
-      // TODO: build out functionality.
+      dispatch('updateItem', {
+        inCart: !inCart,
+        id,
+      });
     }
   </script>
 
@@ -81,19 +85,24 @@
   .item-container-shopping-cart-icon:hover {
     cursor: pointer;
   }
+
+  .in-cart {
+    color:#b5b5bd;
+    text-decoration: line-through;
+  }
   </style>
 
 <div class="item-container">
   {#if !editMode}
-    <p class="item-container-name-display">{name}</p>
+    <p class="item-container-name-display" class:in-cart={inCart}>{name}</p>
     {#if aisle}
-      <p class="item-container-aisle-display">Aisle: {aisle}</p>
+      <p class="item-container-aisle-display" class:in-cart={inCart}>Aisle: {aisle}</p>
     {/if}
     {#if quantity}
-      <p class="item-container-quantity-display">Quantity: {quantity}</p>
+      <p class="item-container-quantity-display" class:in-cart={inCart}>Quantity: {quantity}</p>
     {/if}
     {#if note}
-      <p class="item-container-note-display">Note: {note}</p>
+      <p class="item-container-note-display" class:in-cart={inCart}>Note: {note}</p>
     {/if}
   {:else}
     <input bind:value={newName} placeholder="Enter Name." class="item-container-input"/>

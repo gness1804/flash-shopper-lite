@@ -4,6 +4,7 @@ class Item {
     this.aisle = opts.aisle;
     this.quantity = opts.quantity;
     this.note = opts.note;
+    this.inCart = opts.inCart || false;
     this.id = Date.now();
   }
 }

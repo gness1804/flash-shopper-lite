@@ -17,7 +17,7 @@
     const itemsCookie = Cookies.get('svelteItems');
 		if (itemsCookie) {
       items.set(JSON.parse(itemsCookie));
-		}
+    }
   }
 
   const addItem = ({ detail }) => {
