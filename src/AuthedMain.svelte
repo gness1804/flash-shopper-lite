@@ -110,10 +110,27 @@
   .authed-main-delete-all-items-button {
     background-color: #f00;
     color: #fff;
+    margin-bottom: 0;
+    margin-right: 10px;
   }
 
   .authed-main-my-store-selector-container {
     margin-bottom: 40px;
+  }
+
+  .authed-main-controls-top-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .authed-main-sort-type-selector {
+     margin-bottom: 0;
+  }
+
+  .authed-main-sort-type-label {
+    margin-right: 10px;
   }
 </style>
 
@@ -132,15 +149,17 @@
   <ItemInput on:addItem={addItem}>
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
-  <button on:click={deleteAllItems} disabled={itemsCount === 0} class="authed-main-delete-all-items-button">
-    Delete All Items
-  </button>
-  <span>Sort By:</span>
-  <select bind:value={sortState}>
-    {#each sortOptions as { name, value }}
-      <option value={value}>{name}</option>
-    {/each}
-  </select>
+  <div class="authed-main-controls-top-container">
+    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="authed-main-delete-all-items-button">
+      Delete All Items
+    </button>
+    <span class="authed-main-sort-type-label">Sort By:</span>
+    <select bind:value={sortState} class="authed-main-sort-type-selector">
+      {#each sortOptions as { name, value }}
+        <option value={value}>{name}</option>
+      {/each}
+    </select>
+  </div>
   <div class="authed-main-my-store-selector-container">
     <h4>My Store:</h4>
     {#each groceryStores as { name, value }}
