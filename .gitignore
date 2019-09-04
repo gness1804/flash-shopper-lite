@@ -96,3 +96,6 @@ public/bundle*
 public/*.br
 public/*.gz
 
+# DS Store
+.DS_Store
+
