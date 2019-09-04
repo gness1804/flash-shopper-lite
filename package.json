@@ -14,13 +14,16 @@
     "webpack-dev-server": "^3.3.1"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=production webpack && precompress public",
     "dev": "open 'http://localhost:8080/' && webpack-dev-server --content-base public",
+    "start": "open 'http://localhost:8080/' && http-serve ./public --gzip",
     "lint": "node_modules/.bin/eslint --ext .js  src"
   },
   "dependencies": {
     "babel-eslint": "9.0.0",
     "eslint": "^6.3.0",
-    "js-cookie": "^2.2.1"
+    "http-serve": "^1.0.1",
+    "js-cookie": "^2.2.1",
+    "precompress": "^5.1.0"
   }
 }

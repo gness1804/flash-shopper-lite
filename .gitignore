@@ -87,7 +87,12 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-  # Editor-specific files
+# Editor-specific files
   .vscode/
   .idea/
+
+# public folder bundles
+public/bundle*
+public/*.br
+public/*.gz
 
