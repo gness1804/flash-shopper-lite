@@ -15,8 +15,8 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack && precompress public",
-    "dev": "open 'http://localhost:8080/' && webpack-dev-server --content-base public",
-    "start": "open 'http://localhost:8080/' && http-serve ./public --gzip",
+    "dev": "webpack-dev-server --content-base public",
+    "start": "http-serve ./public --gzip",
     "lint": "node_modules/.bin/eslint --ext .js  src",
     "reset": "npm prune && npm install"
   },
