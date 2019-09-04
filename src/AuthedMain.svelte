@@ -3,7 +3,7 @@
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
   import ItemContainer from './ItemContainer.svelte';
-  import { items } from './stores/mainStore';
+  import { items, itemsSortedByAlpha } from './stores/mainStore';
 
   export let user;
   $: itemsCount = $items.length;
@@ -86,7 +86,7 @@
     Delete All Items
   </button>
   <div class="authed-main-items-container">
-    {#each $items as item (item.id)}
+    {#each $itemsSortedByAlpha as item (item.id)}
       <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
     {/each}
   </div>
