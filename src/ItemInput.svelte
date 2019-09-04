@@ -60,7 +60,7 @@
     <input placeholder="Enter aisle of item." bind:value={aisle} class="item-input-text-input" />
     <input placeholder="Enter quantity of item." bind:value={quantity} class="item-input-text-input" />
     <textarea bind:value={note} class="item-input-note-input" placeholder="Note..."></textarea>
-    <button on:click|preventDefault={handleSubmit} class="item-input-submit-button">
+    <button on:click|preventDefault={handleSubmit} class="item-input-submit-button" disabled={!name}>
       Submit
     </button>
   </form>
