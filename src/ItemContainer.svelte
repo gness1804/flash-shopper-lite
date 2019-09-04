@@ -40,7 +40,13 @@
 
   <style>
   .item-container {
-    margin-bottom: 30px;
+    border: 2px solid #ece9e9;
+    max-width: 60vw;
+    margin: 0 auto 30px;
+  }
+
+  .item-container-name-display {
+    font-weight: 600;
   }
 
   .item-container-input {
@@ -79,21 +85,21 @@
 
 <div class="item-container">
   {#if !editMode}
-    <p>{name}</p>
+    <p class="item-container-name-display">{name}</p>
     {#if aisle}
-      <p>Aisle: {aisle}</p>
+      <p class="item-container-aisle-display">Aisle: {aisle}</p>
     {/if}
     {#if quantity}
-      <p>Quantity: {quantity}</p>
+      <p class="item-container-quantity-display">Quantity: {quantity}</p>
     {/if}
     {#if note}
-      <p>Note: {note}</p>
+      <p class="item-container-note-display">Note: {note}</p>
     {/if}
   {:else}
     <input bind:value={newName} placeholder="Enter Name." class="item-container-input"/>
     <input bind:value={newAisle} placeholder="Enter Aisle." class="item-container-input"/>
     <input bind:value={newQuantity} placeholder="Enter Quantity." class="item-container-input"/>
-    <textarea bind:value={newNote} class="item-container-text-box"></textarea>
+    <textarea bind:value={newNote} class="item-container-text-box" placeholder="Note..."></textarea>
   {/if}
   <div class="item-container-buttons-container">
     <button on:click={deleteItem} class="item-container-delete-button icon">

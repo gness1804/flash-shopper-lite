@@ -63,6 +63,7 @@
   .authed-main-delete-all-items-button {
     background-color: #f00;
     color: #fff;
+    margin-bottom: 60px;
   }
 </style>
 

@@ -36,7 +36,7 @@
 
   .item-input {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
   }
 
   .item-input-note-input {
@@ -59,7 +59,7 @@
     <input placeholder="Enter name of item." bind:value={name} class="item-input-text-input" />
     <input placeholder="Enter aisle of item." bind:value={aisle} class="item-input-text-input" />
     <input placeholder="Enter quantity of item." bind:value={quantity} class="item-input-text-input" />
-    <textarea bind:value={note} class="item-input-note-input"></textarea>
+    <textarea bind:value={note} class="item-input-note-input" placeholder="Note..."></textarea>
     <button on:click|preventDefault={handleSubmit} class="item-input-submit-button">
       Submit
     </button>
