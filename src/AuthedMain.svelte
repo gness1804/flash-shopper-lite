@@ -3,10 +3,27 @@
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
   import ItemContainer from './ItemContainer.svelte';
-  import { items, itemsSortedByAlpha } from './stores/mainStore';
+  import { items } from './stores/mainStore';
 
   export let user;
+
+  let sortState = 'alpha';
   $: itemsCount = $items.length;
+
+  const sortOptions = [
+    {
+      name: 'Alpha',
+      value: 'alpha',
+    },
+    {
+      name: 'Aisle',
+      value: 'aisle',
+    },
+    {
+      name: 'Date Added',
+      value: 'date',
+    },
+  ];
 
   const updateItemsCookie = () => {
     Cookies.remove('svelteItems');
@@ -85,10 +102,42 @@
   <button on:click={deleteAllItems} disabled={itemsCount === 0} class="authed-main-delete-all-items-button">
     Delete All Items
   </button>
-  <div class="authed-main-items-container">
-    {#each $itemsSortedByAlpha as item (item.id)}
-      <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
+  <span>Sort By:</span>
+  <select bind:value={sortState}>
+    {#each sortOptions as { name, value }}
+      <option value={value}>{name}</option>
     {/each}
+  </select>
+  <div class="authed-main-items-container">
+    {#if sortState === 'alpha'}
+      {#each $items.sort((a, b) => {
+        const lowerA = a.name.toLowerCase();
+        const lowerB = b.name.toLowerCase();
+        if (lowerA < lowerB) {
+          return -1;
+        }
+        if (lowerA > lowerB) {
+          return 1;
+        }
+        return 0;
+  }) as item (item.id)}
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
+      {/each}
+    {:else if sortState === 'aisle'}
+      {#each $items.sort((a, b) => {
+        const parsedA = parseFloat(a.aisle) || 0;
+        const parsedB = parseFloat(b.aisle) || 0;
+        if (parsedA < parsedB) {
+          return -1;
+        }
+        if (parsedA > parsedB) {
+          return 1;
+        }
+        return 0;
+  }) as item (item.id)}
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
+      {/each}
+    {/if}
   </div>
 </div>
 
