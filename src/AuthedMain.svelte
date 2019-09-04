@@ -13,6 +13,7 @@
   export let user;
 
   let sortState = 'alpha';
+  let selectedGroceryStore = 'heb';
   $: itemsCount = $items.length;
 
   const sortOptions = [
@@ -27,6 +28,21 @@
     {
       name: 'Date Added',
       value: 'date',
+    },
+  ];
+
+  const groceryStores = [
+    {
+      name: 'H-E-B',
+      value: 'heb',
+    },
+    {
+      name: 'Wal-Mart',
+      value: 'walmart',
+    },
+    {
+      name: 'Kroger',
+      value: 'kroger',
     },
   ];
 
@@ -113,6 +129,13 @@
       <option value={value}>{name}</option>
     {/each}
   </select>
+  <h4>My Store:</h4>
+    {#each groceryStores as { name, value }}
+      <label>
+        <input type="radio" value={value} bind:group={selectedGroceryStore} />
+        {name}
+      </label>
+    {/each}
   <div class="authed-main-items-container">
     {#if sortState === 'alpha'}
       {#each sortAlpha($items) as item (item.id)}
