@@ -110,7 +110,10 @@
   .authed-main-delete-all-items-button {
     background-color: #f00;
     color: #fff;
-    margin-bottom: 60px;
+  }
+
+  .authed-main-my-store-selector-container {
+    margin-bottom: 40px;
   }
 </style>
 
@@ -138,13 +141,15 @@
       <option value={value}>{name}</option>
     {/each}
   </select>
-  <h4>My Store:</h4>
-  {#each groceryStores as { name, value }}
-    <label>
-      <input type="radio" value={value} bind:group={selectedGroceryStore} />
-      {name}
-    </label>
-  {/each}
+  <div class="authed-main-my-store-selector-container">
+    <h4>My Store:</h4>
+    {#each groceryStores as { name, value }}
+      <label>
+        <input type="radio" value={value} bind:group={selectedGroceryStore} />
+        {name}
+      </label>
+    {/each}
+  </div>
   <div class="authed-main-items-container">
     {#if sortState === 'alpha'}
       {#each sortAlpha($items) as item (item.id)}
