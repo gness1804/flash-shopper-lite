@@ -15,6 +15,15 @@
   let sortState = 'alpha';
   let selectedGroceryStore = 'heb';
   $: itemsCount = $items.length;
+  let link;
+
+  $: if (selectedGroceryStore === 'heb') {
+    link = 'https://www.heb.com/search/results?Ntt={{query}}';
+  } else if (selectedGroceryStore === 'walmart') {
+    link = 'https://www.walmart.com/search/search-ng.do?search_query={{query}}';
+  } else {
+    link = 'https://www.kroger.com/search?query={{query}}';
+  }
 
   const sortOptions = [
     {
@@ -130,24 +139,24 @@
     {/each}
   </select>
   <h4>My Store:</h4>
-    {#each groceryStores as { name, value }}
-      <label>
-        <input type="radio" value={value} bind:group={selectedGroceryStore} />
-        {name}
-      </label>
-    {/each}
+  {#each groceryStores as { name, value }}
+    <label>
+      <input type="radio" value={value} bind:group={selectedGroceryStore} />
+      {name}
+    </label>
+  {/each}
   <div class="authed-main-items-container">
     {#if sortState === 'alpha'}
       {#each sortAlpha($items) as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} {link}/>
       {/each}
     {:else if sortState === 'aisle'}
       {#each sortAisle($items) as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} {link}/>
       {/each}
     {:else if sortState === 'date'}
       {#each sortDate($items) as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} />
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} {link}/>
       {/each}
     {/if}
   </div>

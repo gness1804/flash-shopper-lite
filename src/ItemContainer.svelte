@@ -9,6 +9,7 @@
     export let note;
     export let inCart;
     export let id;
+    export let link;
 
     let newName = name;
     let newAisle = aisle;
@@ -118,5 +119,8 @@
     {editMode ? 'Save' : 'Edit'}
     </button>
     <img src="shopping_cart.svg" alt="Shopping cart." class="item-container-shopping-cart-icon icon" on:click={toggleInCart}/>
+    <a href={link.replace(/{{query}}/, newName)} target="_blank">
+      Store Search
+    </a>
   </div>
 </div>
