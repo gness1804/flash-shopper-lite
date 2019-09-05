@@ -15,10 +15,11 @@
     "webpack-dev-server": "^3.3.1"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack && precompress public",
+    "build": "node ./scripts/build.js",
+    "build:fullsize": "node ./scripts/build.js --nogzip",
     "dev": "webpack-dev-server --content-base public",
     "start": "http-serve ./public --gzip",
-    "lint": "node_modules/.bin/eslint --ext .js,.svelte  src",
+    "lint": "node_modules/.bin/eslint --ext .js,.svelte  src scripts",
     "reset": "npm prune && npm install"
   },
   "dependencies": {
