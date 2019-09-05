@@ -11,16 +11,13 @@ module.exports = {
   env: {
     browser: true,
   },
-  // extends: ['airbnb-base'],
-  // check if imports actually resolve
-  // 'settings': {
-  //   'import/resolver': {
-  //     'webpack': {
-  //       'config': 'build/webpack.base.conf.js'
-  //     }
-  //   }
-  // },
-  // add your custom rules here
+  plugins: ['svelte3'],
+  overrides: [
+    {
+      files: '*.svelte',
+      processor: 'svelte3/svelte3'
+    }
+  ],
   'rules': {
     'no-console': 'error',
     'func-names': 'off',

@@ -4,6 +4,7 @@
   "devDependencies": {
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
+    "eslint-plugin-svelte3": "^2.7.3",
     "mini-css-extract-plugin": "^0.6.0",
     "serve": "^11.0.0",
     "style-loader": "^0.23.1",
@@ -17,7 +18,7 @@
     "build": "cross-env NODE_ENV=production webpack && precompress public",
     "dev": "webpack-dev-server --content-base public",
     "start": "http-serve ./public --gzip",
-    "lint": "node_modules/.bin/eslint --ext .js  src",
+    "lint": "node_modules/.bin/eslint --ext .js,.svelte  src",
     "reset": "npm prune && npm install"
   },
   "dependencies": {
