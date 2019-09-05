@@ -15,6 +15,7 @@
   let sortState = 'alpha';
   let selectedGroceryStore = 'heb';
   $: itemsCount = $items.length;
+  $: itemsInCart = $items.filter(_item => _item.inCart).length
   let link;
 
   $: if (selectedGroceryStore === 'heb') {
@@ -141,9 +142,9 @@
     {/if}
 
     {#if itemsCount > 0}
-      <p>There are {itemsCount} items in your cart.</p>
+      <p>You have {itemsCount} {itemsCount > 1 ? 'items' : 'item'} on your list. {itemsInCart} {itemsInCart !== 1 ? 'items are' : 'item is'} in your cart now.</p>
     {:else}
-      <p>There are no items in your cart. Please add one now.</p>
+      <p>There are no items on your list. Please add one now.</p>
     {/if}
   </div>
   <ItemInput on:addItem={addItem} on:showToast>
