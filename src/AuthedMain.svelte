@@ -172,15 +172,15 @@
   <div class="authed-main-items-container">
     {#if sortState === 'alpha'}
       {#each sortAlpha($items) as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} {link}/>
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {:else if sortState === 'aisle'}
       {#each sortAisle($items) as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} {link}/>
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {:else if sortState === 'date'}
       {#each sortDate($items) as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} {link}/>
+        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {/if}
   </div>

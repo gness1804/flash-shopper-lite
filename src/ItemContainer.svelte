@@ -20,6 +20,9 @@
 
     const deleteItem = () => {
       dispatch('deleteItem', id);
+      dispatch('showToast', {
+        message: `${name} was successfully removed.`,
+      });
     }
 
     const toggleEdit = () => {

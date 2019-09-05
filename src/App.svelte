@@ -41,21 +41,22 @@
 		text-align: center;
 	}
 
-	.toast-containter {
-		border: 2px solid #9e9b9b;
+	.toast-container {
 		position: fixed;
 		max-width: 100px;
 		margin: 0 auto;
     left: 50%;
     top: 2vh;
-    z-index: 300;
+		display: flex;
+    align-items: center;
+    justify-content: center;
 	}
 </style>
 
 <div id="app">
 	<h1>Flash Shopper Lite</h1>
 	{#if showToast && message}
-		<div class="toast-containter">
+		<div class="toast-container">
 			<Toast {message} />
 		</div>
 	{/if}
