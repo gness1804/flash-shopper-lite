@@ -34,6 +34,9 @@
           note: newNote,
           id,
         });
+        dispatch('showToast', {
+          message: 'Changes saved.',
+        });
       }
       editMode = !editMode;
     }
