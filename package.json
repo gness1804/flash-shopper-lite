@@ -17,7 +17,8 @@
   "scripts": {
     "build": "node ./scripts/build.js",
     "build:fullsize": "node ./scripts/build.js --nogzip",
-    "dev": "webpack-dev-server --content-base public",
+    "dev": "node ./scripts/dev.js",
+    "dev:open": "node ./scripts/dev.js --open",
     "start": "http-serve ./public --gzip",
     "lint": "node_modules/.bin/eslint --ext .js,.svelte  src scripts",
     "reset": "npm prune && npm install"
