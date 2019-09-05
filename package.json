@@ -19,7 +19,8 @@
     "build:fullsize": "node ./scripts/build.js --nogzip",
     "dev": "node ./scripts/dev.js",
     "dev:open": "node ./scripts/dev.js --open",
-    "start": "http-serve ./public --gzip",
+    "start": "node ./scripts/start.js",
+    "start:open": "node ./scripts/start.js --open",
     "lint": "node_modules/.bin/eslint --ext .js,.svelte  src scripts",
     "reset": "npm prune && npm install"
   },
