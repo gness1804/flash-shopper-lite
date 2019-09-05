@@ -23,6 +23,9 @@
       }
       const item = new Item({ name, aisle, quantity, note });
       dispatch('addItem', item);
+      dispatch('showToast', {
+        message: `${name} successfully added.`,
+      });
       clearInputs();
     }
   </script>

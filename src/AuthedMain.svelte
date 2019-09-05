@@ -146,7 +146,7 @@
       <p>There are no items in your cart. Please add one now.</p>
     {/if}
   </div>
-  <ItemInput on:addItem={addItem}>
+  <ItemInput on:addItem={addItem} on:showToast>
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
   <div class="authed-main-controls-top-container">
