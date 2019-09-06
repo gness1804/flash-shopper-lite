@@ -3,17 +3,18 @@
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
   import ItemContainer from './ItemContainer.svelte';
+  import GroceryAPIResults from './GroceryAPIResults.svelte';
   import { items } from './stores/mainStore';
   import {
   sortAlpha,
-  sortAisle,
-  sortDate,
+  sortNumeric,
 } from './helpers/sort';
 
   export let user;
 
   let sortState = 'alpha';
   let selectedGroceryStore = 'heb';
+  let groceryDataPromise;
   $: itemsCount = $items.length;
   $: itemsInCart = $items.filter(_item => _item.inCart).length
   let link;
@@ -98,8 +99,26 @@
     }
   }
 
+  const fetchGroceryAPIData = async () => {
+    const res = await fetch('https://www.reddit.com/r/grocery.json');
+    const text = await res.text();
+    if (res.ok) {
+			return text;
+		} else {
+			throw new Error(text);
+		}
+  }
+
+  const showRedditData = () => {
+    groceryDataPromise = fetchGroceryAPIData();
+  }
+
+  const hideRedditData = () => {
+    groceryDataPromise = undefined;
+  }
+
   onMount(() => {
-		updateItemsFromCookie();
+    updateItemsFromCookie();
 	});
 </script>
 
@@ -176,18 +195,34 @@
   </div>
   <div class="authed-main-items-container">
     {#if sortState === 'alpha'}
-      {#each sortAlpha($items) as item (item.id)}
+      {#each sortAlpha($items, 'name') as item (item.id)}
         <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {:else if sortState === 'aisle'}
-      {#each sortAisle($items) as item (item.id)}
+      {#each sortNumeric($items, 'aisle') as item (item.id)}
         <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {:else if sortState === 'date'}
-      {#each sortDate($items) as item (item.id)}
+      {#each sortNumeric($items, 'id') as item (item.id)}
         <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {/if}
   </div>
+  {#if !groceryDataPromise}
+    <button on:click={showRedditData}>
+      Show Reddit Data!
+    </button>
+  {:else}
+    <button on:click={hideRedditData}>
+      Hide Reddit Data
+    </button>
+  {/if}
+  {#await groceryDataPromise}
+    <p>Loading...</p>
+  {:then result}
+    <GroceryAPIResults data={result} />
+  {:catch error}
+    <p>Error loading Reddit grocery store data: {error.message || error}</p>
+  {/await}
 </div>
 

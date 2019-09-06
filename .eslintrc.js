@@ -33,6 +33,7 @@ module.exports = {
     'no-unused-vars': 'error',
     'arrow-parens': 'off',
     'operator-linebreak': 'off',
+    'no-debugger': 'error',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
