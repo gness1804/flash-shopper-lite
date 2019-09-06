@@ -33,6 +33,6 @@
       </a>
   {/each}
  {:else }
-  <p>No data found...</p>
+  <p>Click the button above to see Reddit grocery data.</p>
  {/if}
  </div>

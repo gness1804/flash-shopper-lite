@@ -110,9 +110,12 @@
 		}
   }
 
+  const showRedditData = () => {
+    groceryDataPromise = fetchGroceryAPIData();
+  }
+
   onMount(() => {
     updateItemsFromCookie();
-    groceryDataPromise = fetchGroceryAPIData();
 	});
 </script>
 
@@ -202,6 +205,9 @@
       {/each}
     {/if}
   </div>
+  <button on:click={showRedditData}>
+    Show Reddit Data!
+  </button>
   {#await groceryDataPromise}
     <p>Loading...</p>
   {:then result}
