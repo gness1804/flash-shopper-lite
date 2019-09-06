@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 	import * as Cookies from 'js-cookie';
 	import AuthedMain from './AuthedMain.svelte';
 	import LogInView from './LogInView.svelte';
@@ -56,7 +57,7 @@
 <div id="app">
 	<h1>Flash Shopper Lite</h1>
 	{#if showToast && message}
-		<div class="toast-container">
+		<div class="toast-container" transition:fade="{{ duration: 500 }}">
 			<Toast {message} />
 		</div>
 	{/if}
