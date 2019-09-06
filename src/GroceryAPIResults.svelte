@@ -21,19 +21,30 @@
     .grocery-api-results-each-result-title-link:nth-child(odd) {
       background-color: #d8d9da;
     }
+
+    .grocery-api-results-top-buttons-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .grocery-api-results-top-button {
+      margin: 0 5px;
+    }
   </style>
 
  <div class="grocery-api-results">
  {#if parsedData && parsedData.data && parsedData.data.children}
   <h2 class="grocery-api-results-header">What are grocery shoppers on Reddit interested in?</h2>
   <div class="grocery-api-results-top-buttons-container">
-    <button on:click="{ () => sortType = 'alpha' }">
+    <button on:click="{ () => sortType = 'alpha' }" class="grocery-api-results-top-button">
       Sort Alpha
     </button>
-    <button on:click="{ () => sortType = 'date' }">
+    <button on:click="{ () => sortType = 'date' }" class="grocery-api-results-top-button">
      Sort by Date
     </button>
-    <button on:click="{ () => sortType = 'popularity' }">
+    <button on:click="{ () => sortType = 'popularity' }" class="grocery-api-results-top-button">
      Sort by Popularity
     </button>
   </div>
