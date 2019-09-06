@@ -133,6 +133,10 @@
   .authed-main-sort-type-label {
     margin-right: 10px;
   }
+
+  .authed-main-my-store-selector-label:hover {
+    cursor: pointer;
+  }
 </style>
 
 <div class="authed-main">
@@ -164,7 +168,7 @@
   <div class="authed-main-my-store-selector-container">
     <h4>My Store:</h4>
     {#each groceryStores as { name, value }}
-      <label>
+      <label class="authed-main-my-store-selector-label">
         <input type="radio" value={value} bind:group={selectedGroceryStore} />
         {name}
       </label>
