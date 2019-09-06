@@ -114,6 +114,10 @@
     groceryDataPromise = fetchGroceryAPIData();
   }
 
+  const hideRedditData = () => {
+    groceryDataPromise = undefined;
+  }
+
   onMount(() => {
     updateItemsFromCookie();
 	});
@@ -205,9 +209,15 @@
       {/each}
     {/if}
   </div>
-  <button on:click={showRedditData}>
-    Show Reddit Data!
-  </button>
+  {#if !groceryDataPromise}
+    <button on:click={showRedditData}>
+      Show Reddit Data!
+    </button>
+  {:else}
+    <button on:click={hideRedditData}>
+      Hide Reddit Data
+    </button>
+  {/if}
   {#await groceryDataPromise}
     <p>Loading...</p>
   {:then result}
