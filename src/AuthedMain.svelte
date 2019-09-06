@@ -7,8 +7,7 @@
   import { items } from './stores/mainStore';
   import {
   sortAlpha,
-  sortAisle,
-  sortDate,
+  sortNumeric,
 } from './helpers/sort';
 
   export let user;
@@ -200,11 +199,11 @@
         <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {:else if sortState === 'aisle'}
-      {#each sortAisle($items) as item (item.id)}
+      {#each sortNumeric($items, 'aisle') as item (item.id)}
         <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {:else if sortState === 'date'}
-      {#each sortDate($items) as item (item.id)}
+      {#each sortNumeric($items, 'id') as item (item.id)}
         <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {/if}
