@@ -5,15 +5,22 @@
   </script>
 
   <style>
+    .grocery-api-results-header {
+      margin-bottom: 40px;
+    }
+
+    .grocery-api-results-each-result-title {
+      margin-bottom: 25px;
+    }
   </style>
 
  <div class="grocery-api-results">
  {#if parsedData && parsedData.data && parsedData.data.children}
-  <h3>What are grocery shoppers on Reddit interested in?</h3>
+  <h2 class="grocery-api-results-header">What are grocery shoppers on Reddit interested in?</h2>
   {#each parsedData.data.children as { data: _data } (_data.id)}
     <div class="grocery-api-results-each-result-container">
       <a href={`https://reddit.com${_data.permalink}`} target="_blank">
-        <p>{_data.title}</p>
+        <p class="grocery-api-results-each-result-title">{_data.title}</p>
       </a>
     </div>
   {/each}
