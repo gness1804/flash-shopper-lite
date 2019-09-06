@@ -12,6 +12,9 @@ module.exports = {
     browser: true,
   },
   plugins: ['svelte3'],
+  extends: [
+    'airbnb-base'
+  ],
   overrides: [
     {
       files: '*.svelte',
@@ -34,6 +37,7 @@ module.exports = {
     'arrow-parens': 'off',
     'operator-linebreak': 'off',
     'no-debugger': 'error',
+    'import/no-mutable-exports': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
