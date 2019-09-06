@@ -3,6 +3,7 @@
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
   import ItemContainer from './ItemContainer.svelte';
+  import GroceryAPIResults from './GroceryAPIResults.svelte';
   import { items } from './stores/mainStore';
   import {
   sortAlpha,
@@ -14,6 +15,7 @@
 
   let sortState = 'alpha';
   let selectedGroceryStore = 'heb';
+  let groceryDataPromise;
   $: itemsCount = $items.length;
   $: itemsInCart = $items.filter(_item => _item.inCart).length
   let link;
@@ -98,8 +100,19 @@
     }
   }
 
+  const fetchGroceryAPIData = async () => {
+    const res = await fetch('https://www.reddit.com/r/grocery.json');
+    const text = await res.text();
+    if (res.ok) {
+			return text;
+		} else {
+			throw new Error(text);
+		}
+  }
+
   onMount(() => {
-		updateItemsFromCookie();
+    updateItemsFromCookie();
+    groceryDataPromise = fetchGroceryAPIData();
 	});
 </script>
 
@@ -189,5 +202,12 @@
       {/each}
     {/if}
   </div>
+  {#await groceryDataPromise}
+    <p>Loading...</p>
+  {:then result}
+    <GroceryAPIResults data={result} />
+  {:catch error}
+    <p>Error loading Reddit grocery store data: {error.message || error}</p>
+  {/await}
 </div>
 
