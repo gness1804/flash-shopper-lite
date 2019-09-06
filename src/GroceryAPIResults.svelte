@@ -1,6 +1,6 @@
 
   <script>
-    import { sortAlpha } from './helpers/sort';
+    import { sortAlpha, sortNumeric } from './helpers/sort';
 
     export let data;
     $: parsedData = data ? JSON.parse(data) : undefined;
@@ -30,9 +30,23 @@
     <button on:click="{ () => sortType = 'alpha' }">
       Sort Alpha
     </button>
+    <button on:click="{ () => sortType = 'date' }">
+     Sort by Date
+    </button>
   </div>
   {#if sortType === 'alpha'}
     {#each sortAlpha(parsedData.data.children, 'title') as { data: _data } (_data.id)}
+      <a
+        href={`https://reddit.com${_data.permalink}`}
+        target="_blank"
+        class="grocery-api-results-each-result-title-link"
+        title={_data.title}
+      >
+        {_data.title}
+      </a>
+    {/each}
+  {:else if sortType === 'date'}
+    {#each sortNumeric(parsedData.data.children, 'created_utc') as { data: _data } (_data.id)}
       <a
         href={`https://reddit.com${_data.permalink}`}
         target="_blank"
