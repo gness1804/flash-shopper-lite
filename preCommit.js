@@ -46,6 +46,9 @@ const checkFile = (fileName, data) => new Promise((resolve, reject) => {
   if (data.match(/it.only/g) && data.match(/it.only/g).length) {
     reject(resetAndExit(`Error: it.only in ${fileName}. Exiting.`));
   }
+  if (data.match(/@debug/g) && data.match(/@debug/g).length) {
+    reject(resetAndExit(`Error: @debug in ${fileName}. Exiting.`));
+  }
   if (data.match(/revert/g) && data.match(/revert/g).length) {
     reject(resetAndExit(`Error: revert in ${fileName}. Exiting.`));
   } else {
