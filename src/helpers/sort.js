@@ -1,10 +1,11 @@
 /** Sorts array alphabetically by 'name' property.
 * @param {Object[]} arr - the array to sort.
+*  @param {string} prop - the prop name to sort by. Ex: 'name'
 * @returns {Object[]} - sorted array.
 */
-const sortAlpha = (arr) => arr.sort((a, b) => {
-  const lowerA = a.name.toLowerCase();
-  const lowerB = b.name.toLowerCase();
+const sortAlpha = (arr, prop) => arr.sort((a, b) => {
+  const lowerA = a[prop] ? a[prop].toLowerCase() : a.data[prop].toLowerCase();
+  const lowerB = b[prop] ? b[prop].toLowerCase(): b.data[prop].toLowerCase();
   if (lowerA < lowerB) {
     return -1;
   }

@@ -196,7 +196,7 @@
   </div>
   <div class="authed-main-items-container">
     {#if sortState === 'alpha'}
-      {#each sortAlpha($items) as item (item.id)}
+      {#each sortAlpha($items, 'name') as item (item.id)}
         <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
       {/each}
     {:else if sortState === 'aisle'}
