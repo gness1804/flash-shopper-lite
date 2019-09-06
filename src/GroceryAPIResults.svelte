@@ -33,6 +33,9 @@
     <button on:click="{ () => sortType = 'date' }">
      Sort by Date
     </button>
+    <button on:click="{ () => sortType = 'popularity' }">
+     Sort by Popularity
+    </button>
   </div>
   {#if sortType === 'alpha'}
     {#each sortAlpha(parsedData.data.children, 'title') as { data: _data } (_data.id)}
@@ -47,6 +50,17 @@
     {/each}
   {:else if sortType === 'date'}
     {#each sortNumeric(parsedData.data.children, 'created_utc') as { data: _data } (_data.id)}
+      <a
+        href={`https://reddit.com${_data.permalink}`}
+        target="_blank"
+        class="grocery-api-results-each-result-title-link"
+        title={_data.title}
+      >
+        {_data.title}
+      </a>
+    {/each}
+  {:else if sortType === 'popularity'}
+      {#each sortNumeric(parsedData.data.children, 'ups') as { data: _data } (_data.id)}
       <a
         href={`https://reddit.com${_data.permalink}`}
         target="_blank"
