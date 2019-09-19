@@ -1,12 +1,12 @@
 
-  <script>
-    import { sortAlpha, sortNumeric } from './helpers/sort';
+<script>
+  import { sortAlpha, sortNumeric } from './helpers/sort';
 
-    export let data;
-    $: parsedData = data ? JSON.parse(data) : undefined;
+  export let data;
+  $: parsedData = data ? JSON.parse(data) : undefined;
 
-    let sortType = 'default';
-  </script>
+  let sortType = 'default';
+</script>
 
   <style>
     .grocery-api-results-header {

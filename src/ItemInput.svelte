@@ -14,21 +14,26 @@
       aisle = '';
       quantity = '';
       note = '';
-    }
+    };
 
     const handleSubmit = () => {
       if (!name) {
         alert('Error: name required.');
         return;
       }
-      const item = new Item({ name, aisle, quantity, note });
+      const item = new Item({
+        name,
+        aisle,
+        quantity,
+        note,
+  });
       dispatch('addItem', item);
       dispatch('showToast', {
         message: `${name} was successfully added.`,
       });
       clearInputs();
-    }
-  </script>
+    };
+</script>
 
   <style>
   .item-input-text-input {

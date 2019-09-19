@@ -23,7 +23,7 @@
       dispatch('showToast', {
         message: `${name} was successfully removed.`,
       });
-    }
+    };
 
     const toggleEdit = () => {
       if (editMode) {
@@ -39,15 +39,15 @@
         });
       }
       editMode = !editMode;
-    }
+    };
 
     const toggleInCart = () => {
       dispatch('updateItem', {
         inCart: !inCart,
         id,
       });
-    }
-  </script>
+    };
+</script>
 
   <style>
   .item-container {

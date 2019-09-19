@@ -3,18 +3,18 @@
 
   const dispatch = createEventDispatcher();
 
-  let user = {
+  const user = {
     name: '',
     password: '',
-  }
+  };
 
 const logIn = () => {
-  if (!user.name || !user.password) {
-    alert('Error: user name and password required. Please try again.');
-    return;
-  }
-  dispatch('logIn', { user });
-}
+    if (!user.name || !user.password) {
+      alert('Error: user name and password required. Please try again.');
+      return;
+    }
+    dispatch('logIn', { user });
+  };
 </script>
 
 <style>
