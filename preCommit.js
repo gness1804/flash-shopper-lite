@@ -92,7 +92,7 @@ getCurrentBranch()
   .then(() => promisifiedExec('npm run lint'))
   // .then(() => promisifiedExec('npm run test'))
   .then(() => {
-    process.stdout.write('Sucessfully passed pre-commit checks. \n');
+    process.stdout.write('Successfully passed pre-commit checks. \n');
     process.exit(0);
   })
   .catch(err => {
