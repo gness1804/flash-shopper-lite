@@ -37,7 +37,13 @@ module.exports = {
     'arrow-parens': 'off',
     'operator-linebreak': 'off',
     'no-debugger': 'error',
+    // the following rules are not explicitly specific to svelte, but leaving them on causes problems with how svelte works.
     'import/no-mutable-exports': 'off',
+    'import/first': 'off',
+    'import/prefer-default-export': 'off',
+    'prefer-object-spread': 'off',
+    'no-restricted-globals': 'warn',
+    'no-return-assign': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
