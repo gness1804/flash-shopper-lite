@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const { execSync } = require('child_process');
 const handleOutput = require('./handleOutput');
 
@@ -9,4 +8,3 @@ if (arg === '--open') {
 } else {
   execSync('webpack-dev-server --content-base public', handleOutput);
 }
-

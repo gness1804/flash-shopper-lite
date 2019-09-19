@@ -6,8 +6,8 @@
   import GroceryAPIResults from './GroceryAPIResults.svelte';
   import { items } from './stores/mainStore';
   import {
-  sortAlpha,
-  sortNumeric,
+    sortAlpha,
+    sortNumeric,
 } from './helpers/sort';
 
   export let user;
@@ -16,7 +16,7 @@
   let selectedGroceryStore = 'heb';
   let groceryDataPromise;
   $: itemsCount = $items.length;
-  $: itemsInCart = $items.filter(_item => _item.inCart).length
+  $: itemsInCart = $items.filter(_item => _item.inCart).length;
   let link;
 
   $: if (selectedGroceryStore === 'heb') {
@@ -60,36 +60,36 @@
   const updateItemsCookie = () => {
     Cookies.remove('svelteItems');
     Cookies.set('svelteItems', $items, { expires: 2 });
-  }
+  };
 
   const updateItemsFromCookie = () => {
     const itemsCookie = Cookies.get('svelteItems');
-		if (itemsCookie) {
+    if (itemsCookie) {
       items.set(JSON.parse(itemsCookie));
     }
-  }
+  };
 
   const addItem = ({ detail }) => {
     items.update(_items => [..._items, detail]);
     updateItemsCookie();
-  }
+  };
 
   const deleteItem = ({ detail: id }) => {
     const newItems = $items.filter(item => item.id !== id);
     items.set(newItems);
     updateItemsCookie();
-  }
+  };
 
-  const updateItem = ({detail}) => {
+  const updateItem = ({ detail }) => {
     const newItems = $items.map(_item => {
       if (_item.id === detail.id) {
-        return Object.assign({}, _item, {...detail});
+        return Object.assign({}, _item, { ...detail });
       }
       return _item;
     });
-  items.set(newItems);
-  updateItemsCookie();
-  }
+    items.set(newItems);
+    updateItemsCookie();
+  };
 
   const deleteAllItems = () => {
     const warn = confirm('This will delete ALL items! Are you sure?');
@@ -97,29 +97,28 @@
       items.set([]);
       updateItemsCookie();
     }
-  }
+  };
 
   const fetchGroceryAPIData = async () => {
     const res = await fetch('https://www.reddit.com/r/grocery.json');
     const text = await res.text();
     if (res.ok) {
-			return text;
-		} else {
-			throw new Error(text);
-		}
-  }
+      return text;
+    }
+    throw new Error(text);
+  };
 
   const showRedditData = () => {
     groceryDataPromise = fetchGroceryAPIData();
-  }
+  };
 
   const hideRedditData = () => {
     groceryDataPromise = undefined;
-  }
+  };
 
   onMount(() => {
     updateItemsFromCookie();
-	});
+});
 </script>
 
 <style>

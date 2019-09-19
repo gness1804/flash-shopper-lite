@@ -8,11 +8,11 @@
 const findPropRecursively = (obj, prop) => {
   if (obj[prop]) {
     return obj[prop];
-  } else if (obj.data) {
+  } if (obj.data) {
     return findPropRecursively(obj.data, prop);
   }
   return undefined;
-}
+};
 
 /** Sorts array alphabetically by a custom property.
 * @param {Object[]} arr - the array to sort.
@@ -58,4 +58,4 @@ const sortNumeric = (arr, prop) => arr.sort((a, b) => {
 export {
   sortAlpha,
   sortNumeric,
-}
+};

@@ -12,28 +12,28 @@
 	let message = '';
 
 	const handleLogin = ({ detail: { user: _user } }) => {
-		user = _user;
-		userLoggedIn = true;
-		Cookies.remove('svelteUser');
-		Cookies.set('svelteUser', user, { expires: 2 });
-	}
+	  user = _user;
+	  userLoggedIn = true;
+	  Cookies.remove('svelteUser');
+	  Cookies.set('svelteUser', user, { expires: 2 });
+	};
 
 	const showToastFn = ({ detail }) => {
-		const { message: _message } = detail;
-		message = _message;
-		showToast = true;
-		setTimeout(() => {
-			message = '';
-			showToast = false;
-		}, 3000);
-	}
+	  const { message: _message } = detail;
+	  message = _message;
+	  showToast = true;
+	  setTimeout(() => {
+	    message = '';
+	    showToast = false;
+	  }, 3000);
+	};
 
 	onMount(() => {
-		const userCookie = Cookies.get('svelteUser');
-		if (userCookie) {
-			user = JSON.parse(userCookie);
-			userLoggedIn = true;
-		}
+	  const userCookie = Cookies.get('svelteUser');
+	  if (userCookie) {
+	    user = JSON.parse(userCookie);
+	    userLoggedIn = true;
+	  }
 	});
 </script>
 
