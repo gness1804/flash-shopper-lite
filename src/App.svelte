@@ -55,7 +55,7 @@
 </style>
 
 <div id="app">
-	<h1>Flash Shopper Lite</h1>
+	<h1 id="app-header">Flash Shopper Lite</h1>
 	{#if showToast && message}
 		<div class="toast-container" transition:fade="{{ duration: 500 }}">
 			<Toast {message} />
