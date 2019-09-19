@@ -4,6 +4,7 @@
   "devDependencies": {
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
+    "cypress": "^3.4.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
@@ -23,7 +24,8 @@
     "start": "node ./scripts/start.js",
     "start:open": "node ./scripts/start.js --open",
     "lint": "node_modules/.bin/eslint --ext .js,.svelte  src scripts",
-    "reset": "npm prune && npm install"
+    "reset": "npm prune && npm install",
+    "e2e": "cypress open"
   },
   "dependencies": {
     "babel-eslint": "9.0.0",
