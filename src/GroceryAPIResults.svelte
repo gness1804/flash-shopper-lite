@@ -6,6 +6,8 @@
   $: parsedData = data ? JSON.parse(data) : undefined;
 
   let sortType = 'default';
+
+  const linkStyle = 'mb-6 block link py-3';
 </script>
 
   <style>
@@ -33,7 +35,7 @@
       <a
         href={`https://reddit.com${_data.permalink}`}
         target="_blank"
-        class="mb-6 block link py-3"
+        class={linkStyle}
         title={_data.title}
       >
         {_data.title}
@@ -44,7 +46,7 @@
       <a
         href={`https://reddit.com${_data.permalink}`}
         target="_blank"
-        class="mb-6 block link py-3"
+        class={linkStyle}
         title={_data.title}
       >
         {_data.title}
@@ -55,7 +57,7 @@
       <a
         href={`https://reddit.com${_data.permalink}`}
         target="_blank"
-        class="mb-6 block link py-3"
+        class={linkStyle}
         title={_data.title}
       >
         {_data.title}
@@ -66,7 +68,7 @@
         <a
           href={`https://reddit.com${_data.permalink}`}
           target="_blank"
-          class="mb-6 block link py-3"
+          class={linkStyle}
           title={_data.title}
         >
           {_data.title}
