@@ -6,45 +6,27 @@
   $: parsedData = data ? JSON.parse(data) : undefined;
 
   let sortType = 'default';
+
+  const linkStyle = 'mb-6 block link py-3';
 </script>
 
   <style>
-    .grocery-api-results-header {
-      margin-bottom: 40px;
-    }
-
-    .grocery-api-results-each-result-title-link {
-      margin-bottom: 25px;
-      display: block;
-    }
-
-    .grocery-api-results-each-result-title-link:nth-child(odd) {
+    .link:nth-child(odd) {
       background-color: #d8d9da;
-    }
-
-    .grocery-api-results-top-buttons-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 40px;
-    }
-
-    .grocery-api-results-top-button {
-      margin: 0 5px;
     }
   </style>
 
  <div class="grocery-api-results">
  {#if parsedData && parsedData.data && parsedData.data.children}
-  <h2 class="grocery-api-results-header">What are grocery shoppers on Reddit interested in?</h2>
-  <div class="grocery-api-results-top-buttons-container">
-    <button on:click="{ () => sortType = 'alpha' }" class="grocery-api-results-top-button">
+  <h2 class="mb-10">What are grocery shoppers on Reddit interested in?</h2>
+  <div class="flex items-center justify-center mb-10">
+    <button on:click="{ () => sortType = 'alpha' }" class="my-0 mx-1">
       Sort Alpha
     </button>
-    <button on:click="{ () => sortType = 'date' }" class="grocery-api-results-top-button">
+    <button on:click="{ () => sortType = 'date' }" class="my-0 mx-1">
      Sort by Date
     </button>
-    <button on:click="{ () => sortType = 'popularity' }" class="grocery-api-results-top-button">
+    <button on:click="{ () => sortType = 'popularity' }" class="my-0 mx-1">
      Sort by Popularity
     </button>
   </div>
@@ -53,7 +35,7 @@
       <a
         href={`https://reddit.com${_data.permalink}`}
         target="_blank"
-        class="grocery-api-results-each-result-title-link"
+        class={linkStyle}
         title={_data.title}
       >
         {_data.title}
@@ -64,7 +46,7 @@
       <a
         href={`https://reddit.com${_data.permalink}`}
         target="_blank"
-        class="grocery-api-results-each-result-title-link"
+        class={linkStyle}
         title={_data.title}
       >
         {_data.title}
@@ -75,7 +57,7 @@
       <a
         href={`https://reddit.com${_data.permalink}`}
         target="_blank"
-        class="grocery-api-results-each-result-title-link"
+        class={linkStyle}
         title={_data.title}
       >
         {_data.title}
@@ -86,7 +68,7 @@
         <a
           href={`https://reddit.com${_data.permalink}`}
           target="_blank"
-          class="grocery-api-results-each-result-title-link"
+          class={linkStyle}
           title={_data.title}
         >
           {_data.title}

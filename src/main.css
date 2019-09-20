@@ -1,0 +1,6 @@
+/* commented out because it was messing with my styles */
+/* @import "../node_modules/tailwindcss/dist/base.css"; */
+
+@import "../node_modules/tailwindcss/dist/components.css";
+
+@import "../node_modules/tailwindcss/dist/utilities.css";

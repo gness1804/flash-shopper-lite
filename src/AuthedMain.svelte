@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte';
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
   import ItemContainer from './ItemContainer.svelte';
@@ -56,6 +56,12 @@
       value: 'kroger',
     },
   ];
+
+  const dispatch = createEventDispatcher();
+
+  const logOut = () => {
+    dispatch('logOut');
+  };
 
   const updateItemsCookie = () => {
     Cookies.remove('svelteItems');
@@ -122,45 +128,18 @@
 </script>
 
 <style>
-  .authed-main-top-message-container {
-    margin-bottom: 40px;
-  }
-
-  .authed-main-delete-all-items-button {
+  .destructive-button {
     background-color: #f00;
-    color: #fff;
-    margin-bottom: 0;
-    margin-right: 10px;
-  }
-
-  .authed-main-my-store-selector-container {
-    margin-bottom: 40px;
-  }
-
-  .authed-main-controls-top-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-
-  .authed-main-sort-type-selector {
-     margin-bottom: 0;
-  }
-
-  .authed-main-sort-type-label {
-    margin-right: 10px;
-  }
-
-  .authed-main-my-store-selector-label:hover {
-    cursor: pointer;
   }
 </style>
 
 <div class="authed-main">
-  <div class="authed-main-top-message-container">
+  <div class="mb-10">
     {#if user}
-    <p>Hello, {user.name}</p>
+    <p>Hello, <span class="font-bold">{user.name}</span></p>
+    <button class="destructive-button mb-0 text-white" on:click={logOut}>
+      Log Out
+    </button>
     {/if}
 
     {#if itemsCount > 0}
@@ -172,21 +151,21 @@
   <ItemInput on:addItem={addItem} on:showToast>
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
-  <div class="authed-main-controls-top-container">
-    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="authed-main-delete-all-items-button">
+  <div class="flex justify-center items-center mb-2">
+    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="destructive-button text-white mb-0 mr-2">
       Delete All Items
     </button>
-    <span class="authed-main-sort-type-label">Sort By:</span>
-    <select bind:value={sortState} class="authed-main-sort-type-selector">
+    <span class="mr-2">Sort By:</span>
+    <select bind:value={sortState} class="mb-0">
       {#each sortOptions as { name, value }}
         <option value={value}>{name}</option>
       {/each}
     </select>
   </div>
-  <div class="authed-main-my-store-selector-container">
+  <div class="mb-10">
     <h4>My Store:</h4>
     {#each groceryStores as { name, value }}
-      <label class="authed-main-my-store-selector-label">
+      <label class="cursor-pointer">
         <input type="radio" value={value} bind:group={selectedGroceryStore} />
         {name}
       </label>

@@ -6,14 +6,14 @@
 	import LogInView from './LogInView.svelte';
 	import Toast from './Toast.svelte';
 
-	let userLoggedIn = false;
 	let user = null;
 	let showToast = false;
 	let message = '';
 
+	export let title;
+
 	const handleLogin = ({ detail: { user: _user } }) => {
 	  user = _user;
-	  userLoggedIn = true;
 	  Cookies.remove('svelteUser');
 	  Cookies.set('svelteUser', user, { expires: 2 });
 	};
@@ -28,42 +28,44 @@
 	  }, 3000);
 	};
 
+	const logOut = () => {
+	  const warn = confirm('Log out: are you sure?');
+	  if (warn) {
+	    user = null;
+	    Cookies.remove('svelteUser');
+	  }
+	};
+
 	onMount(() => {
 	  const userCookie = Cookies.get('svelteUser');
 	  if (userCookie) {
 	    user = JSON.parse(userCookie);
-	    userLoggedIn = true;
 	  }
 	});
 </script>
 
 <style>
-	#app {
-		text-align: center;
-	}
-
 	.toast-container {
-		position: fixed;
 		max-width: 100px;
-		margin: 0 auto;
     left: 50%;
     top: 2vh;
-		display: flex;
-    align-items: center;
-    justify-content: center;
 	}
 </style>
 
-<div id="app">
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
+
+<div id="app" class="text-center">
 	<h1>Flash Shopper Lite</h1>
 	{#if showToast && message}
-		<div class="toast-container" transition:fade="{{ duration: 500 }}">
+		<div class="toast-container fixed my-0 mx-auto flex items-center justify-center" transition:fade="{{ duration: 500 }}">
 			<Toast {message} />
 		</div>
 	{/if}
 
-	{#if userLoggedIn && user}
-		<AuthedMain user={user} on:showToast={showToastFn} />
+	{#if user}
+		<AuthedMain user={user} on:showToast={showToastFn} on:logOut={logOut} />
 	{:else}
 		<LogInView on:logIn={handleLogin} />
 	{/if}
