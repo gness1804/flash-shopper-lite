@@ -6,14 +6,12 @@
 	import LogInView from './LogInView.svelte';
 	import Toast from './Toast.svelte';
 
-	let userLoggedIn = false;
 	let user = null;
 	let showToast = false;
 	let message = '';
 
 	const handleLogin = ({ detail: { user: _user } }) => {
 	  user = _user;
-	  userLoggedIn = true;
 	  Cookies.remove('svelteUser');
 	  Cookies.set('svelteUser', user, { expires: 2 });
 	};
@@ -40,7 +38,6 @@
 	  const userCookie = Cookies.get('svelteUser');
 	  if (userCookie) {
 	    user = JSON.parse(userCookie);
-	    userLoggedIn = true;
 	  }
 	});
 </script>
@@ -66,7 +63,7 @@
 		</div>
 	{/if}
 
-	{#if userLoggedIn && user}
+	{#if user}
 		<AuthedMain user={user} on:showToast={showToastFn} on:logOut={logOut} />
 	{:else}
 		<LogInView on:logIn={handleLogin} />
