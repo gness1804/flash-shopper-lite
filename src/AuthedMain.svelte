@@ -136,7 +136,7 @@
 <div class="authed-main">
   <div class="mb-10">
     {#if user}
-    <p>Hello, {user.name}</p>
+    <p>Hello, <span class="font-bold">{user.name}</span></p>
     <button class="destructive-button mb-0 text-white" on:click={logOut}>
       Log Out
     </button>

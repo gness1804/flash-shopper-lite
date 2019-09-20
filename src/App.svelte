@@ -46,14 +46,9 @@
 
 <style>
 	.toast-container {
-		position: fixed;
 		max-width: 100px;
-		margin: 0 auto;
     left: 50%;
     top: 2vh;
-		display: flex;
-    align-items: center;
-    justify-content: center;
 	}
 </style>
 
@@ -64,7 +59,7 @@
 <div id="app" class="text-center">
 	<h1>Flash Shopper Lite</h1>
 	{#if showToast && message}
-		<div class="toast-container" transition:fade="{{ duration: 500 }}">
+		<div class="toast-container fixed my-0 mx-auto flex items-center justify-center" transition:fade="{{ duration: 500 }}">
 			<Toast {message} />
 		</div>
 	{/if}
