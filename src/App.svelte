@@ -28,6 +28,14 @@
 	  }, 3000);
 	};
 
+	const logOut = () => {
+	  const warn = confirm('Log out: are you sure?');
+	  if (warn) {
+	    user = null;
+	    Cookies.remove('svelteUser');
+	  }
+	};
+
 	onMount(() => {
 	  const userCookie = Cookies.get('svelteUser');
 	  if (userCookie) {
@@ -59,7 +67,7 @@
 	{/if}
 
 	{#if userLoggedIn && user}
-		<AuthedMain user={user} on:showToast={showToastFn} />
+		<AuthedMain user={user} on:showToast={showToastFn} on:logOut={logOut} />
 	{:else}
 		<LogInView on:logIn={handleLogin} />
 	{/if}

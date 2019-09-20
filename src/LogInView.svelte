@@ -17,9 +17,6 @@ const logIn = () => {
   };
 </script>
 
-<style>
-</style>
-
 <label>
   <input placeholder="Enter Name" type="text" bind:value={user.name} />
 </label>

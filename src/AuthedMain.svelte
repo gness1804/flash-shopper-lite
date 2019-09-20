@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte';
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
   import ItemContainer from './ItemContainer.svelte';
@@ -56,6 +56,12 @@
       value: 'kroger',
     },
   ];
+
+  const dispatch = createEventDispatcher();
+
+  const logOut = () => {
+    dispatch('logOut');
+  };
 
   const updateItemsCookie = () => {
     Cookies.remove('svelteItems');
@@ -122,7 +128,7 @@
 </script>
 
 <style>
-  .delete-all-items-button {
+  .destructive-button {
     background-color: #f00;
   }
 </style>
@@ -131,6 +137,9 @@
   <div class="mb-10">
     {#if user}
     <p>Hello, {user.name}</p>
+    <button class="destructive-button mb-0 text-white" on:click={logOut}>
+      Log Out
+    </button>
     {/if}
 
     {#if itemsCount > 0}
@@ -143,7 +152,7 @@
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
   <div class="flex justify-center items-center mb-2">
-    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="delete-all-items-button text-white mb-0 mr-2">
+    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="destructive-button text-white mb-0 mr-2">
       Delete All Items
     </button>
     <span class="mr-2">Sort By:</span>
