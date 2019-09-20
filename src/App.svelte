@@ -10,6 +10,8 @@
 	let showToast = false;
 	let message = '';
 
+	export let title;
+
 	const handleLogin = ({ detail: { user: _user } }) => {
 	  user = _user;
 	  Cookies.remove('svelteUser');
@@ -54,6 +56,10 @@
     justify-content: center;
 	}
 </style>
+
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
 
 <div id="app" class="text-center">
 	<h1>Flash Shopper Lite</h1>
