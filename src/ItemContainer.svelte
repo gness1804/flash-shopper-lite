@@ -50,47 +50,8 @@
 </script>
 
   <style>
-  .item-container {
-    border: 2px solid #ece9e9;
-    max-width: 60vw;
-    margin: 0 auto 30px;
-  }
-
-  .item-container-name-display {
-    font-weight: 600;
-  }
-
-  .item-container-input {
-    display: block;
-    margin: 0 auto 10px;
-  }
-
-  .item-container-text-box {
-    margin: 0 auto 10px;
-    display: block;
-  }
-
-  .item-container-buttons-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .item-container-delete-button {
+  .delete-button {
     background-color: #f00;
-    color: #fff;
-  }
-
-  .item-container-shopping-cart-icon {
-    height: 50px;
-  }
-
-  .icon {
-    margin-right: 8px;
-  }
-
-  .item-container-shopping-cart-icon:hover {
-    cursor: pointer;
   }
 
   .in-cart {
@@ -99,9 +60,9 @@
   }
   </style>
 
-<div class="item-container">
+<div class="border-2 border-solid border-gray-400 mt-0 mx-auto mb-8 max-w-md">
   {#if !editMode}
-    <p class="item-container-name-display" class:in-cart={inCart}>{name}</p>
+    <p class="font-semibold" class:in-cart={inCart}>{name}</p>
     {#if aisle}
       <p class="item-container-aisle-display" class:in-cart={inCart}>Aisle: {aisle}</p>
     {/if}
@@ -112,19 +73,19 @@
       <p class="item-container-note-display" class:in-cart={inCart}>Note: {note}</p>
     {/if}
   {:else}
-    <input bind:value={newName} placeholder="Enter Name." class="item-container-input"/>
-    <input bind:value={newAisle} placeholder="Enter Aisle." class="item-container-input"/>
-    <input bind:value={newQuantity} placeholder="Enter Quantity." class="item-container-input"/>
-    <textarea bind:value={newNote} class="item-container-text-box" placeholder="Note..."></textarea>
+    <input bind:value={newName} placeholder="Enter Name." class="block mt-0 mx-auto mb-3"/>
+    <input bind:value={newAisle} placeholder="Enter Aisle." class="block mt-0 mx-auto mb-3"/>
+    <input bind:value={newQuantity} placeholder="Enter Quantity." class="block mt-0 mx-auto mb-3"/>
+    <textarea bind:value={newNote} class="block mt-0 mx-auto mb-3" placeholder="Note..."></textarea>
   {/if}
-  <div class="item-container-buttons-container">
-    <button on:click={deleteItem} class="item-container-delete-button icon">
+  <div class="flex items-center justify-center">
+    <button on:click={deleteItem} class="delete-button text-white mr-2">
       X
     </button>
-    <button on:click={toggleEdit} class="icon">
+    <button on:click={toggleEdit} class="mr-2">
     {editMode ? 'Save' : 'Edit'}
     </button>
-    <img src="shopping_cart.svg" alt="Shopping cart." class="item-container-shopping-cart-icon icon" on:click={toggleInCart}/>
+    <img src="shopping_cart.svg" alt="Shopping cart." class="h-10 mr-2 cursor-pointer" on:click={toggleInCart} />
     <a href={link.replace(/{{query}}/, newName)} target="_blank">
       Store Search
     </a>
