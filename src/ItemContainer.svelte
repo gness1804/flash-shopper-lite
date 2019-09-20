@@ -18,6 +18,8 @@
 
     const dispatch = createEventDispatcher();
 
+    const inputStyle = 'block mt-0 mx-auto mb-3';
+
     const deleteItem = () => {
       dispatch('deleteItem', id);
       dispatch('showToast', {
@@ -73,10 +75,10 @@
       <p class="item-container-note-display" class:in-cart={inCart}>Note: {note}</p>
     {/if}
   {:else}
-    <input bind:value={newName} placeholder="Enter Name." class="block mt-0 mx-auto mb-3"/>
-    <input bind:value={newAisle} placeholder="Enter Aisle." class="block mt-0 mx-auto mb-3"/>
-    <input bind:value={newQuantity} placeholder="Enter Quantity." class="block mt-0 mx-auto mb-3"/>
-    <textarea bind:value={newNote} class="block mt-0 mx-auto mb-3" placeholder="Note..."></textarea>
+    <input bind:value={newName} placeholder="Enter Name." class={inputStyle}/>
+    <input bind:value={newAisle} placeholder="Enter Aisle." class={inputStyle}/>
+    <input bind:value={newQuantity} placeholder="Enter Quantity." class={inputStyle}/>
+    <textarea bind:value={newNote} class={inputStyle} placeholder="Note..."></textarea>
   {/if}
   <div class="flex items-center justify-center">
     <button on:click={deleteItem} class="delete-button text-white mr-2">
