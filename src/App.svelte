@@ -38,10 +38,6 @@
 </script>
 
 <style>
-	#app {
-		text-align: center;
-	}
-
 	.toast-container {
 		position: fixed;
 		max-width: 100px;
@@ -54,7 +50,7 @@
 	}
 </style>
 
-<div id="app">
+<div id="app" class="text-center">
 	<h1>Flash Shopper Lite</h1>
 	{#if showToast && message}
 		<div class="toast-container" transition:fade="{{ duration: 500 }}">
