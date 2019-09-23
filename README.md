@@ -68,3 +68,17 @@ Then, from within your project folder:
 npm run build
 surge public
 ```
+
+## Testing:
+
+This project uses [Cypress](https://cypress.io) for end-to-end testing. To run the tests, you can either use the GUI:
+
+```bash
+npm run e2e:open
+```
+
+Or run the tests using the CLI:
+
+```bash
+npm run e2e
+```
