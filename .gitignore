@@ -99,3 +99,7 @@ public/*.gz
 # DS Store
 .DS_Store
 
+# Cypress
+
+cypress/videos
+

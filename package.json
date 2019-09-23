@@ -4,8 +4,10 @@
   "devDependencies": {
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
+    "cypress": "^3.4.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-cypress": "^2.6.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-svelte3": "^2.7.3",
     "mini-css-extract-plugin": "^0.6.0",
@@ -32,7 +34,9 @@
     "start:open": "node ./scripts/start.js --open",
     "lint": "node_modules/.bin/eslint --ext .js,.svelte  src scripts",
     "reset": "npm prune && npm install",
-    "prettier": "prettier --write --plugin-search-dir=. ./**/*.svelte ./**/*.html ./**/*.js preCommit.js",
+    "e2e:open": "cypress open",
+    "e2e": "cypress run",
+    "prettier": "prettier --write --plugin-search-dir=. ./**/*.svelte ./**/*.html ./**/*.js ./**/*.spec.js preCommit.js",
     "deploy": "now"
   },
   "dependencies": {
