@@ -131,7 +131,7 @@
 </style>
 
 <div class="authed-main">
-  <div class="mb-10">
+  <div class="mb-10 user-info-display">
     {#if user}
       <p>
         Hello,
