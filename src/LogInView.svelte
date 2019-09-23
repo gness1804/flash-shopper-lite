@@ -10,10 +10,11 @@
 
   let errorMessage = '';
 
-  const logIn = (e) => {
+  const logIn = e => {
     if (!user.name || !user.password) {
       e.preventDefault();
-      errorMessage = 'Error: user name and password required. Please try again.';
+      errorMessage =
+        'Error: user name and password required. Please try again.';
       return;
     }
     dispatch('logIn', { user });
@@ -39,9 +40,9 @@
       class="mb-0" />
   </label>
 
-{#if errorMessage}
-  <p class="text-red-700">{errorMessage}</p>
-{/if}
+  {#if errorMessage}
+    <p class="text-red-700">{errorMessage}</p>
+  {/if}
 
   <button on:click={logIn} class="bg-green-600 text-white">Log In</button>
 </form>
