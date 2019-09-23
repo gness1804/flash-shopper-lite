@@ -68,22 +68,19 @@
   {#if !editMode}
     <p class="font-semibold" class:in-cart={inCart}>{name}</p>
     {#if aisle}
-      <p class="item-container-aisle-display" class:in-cart={inCart}>
-        Aisle: {aisle}
-      </p>
+      <p class:in-cart={inCart}>Aisle: {aisle}</p>
     {/if}
     {#if quantity}
-      <p class="item-container-quantity-display" class:in-cart={inCart}>
-        Quantity: {quantity}
-      </p>
+      <p class:in-cart={inCart}>Quantity: {quantity}</p>
     {/if}
     {#if note}
-      <p class="item-container-note-display" class:in-cart={inCart}>
-        Note: {note}
-      </p>
+      <p class="mb-8" class:in-cart={inCart}>Note: {note}</p>
     {/if}
   {:else}
-    <input bind:value={newName} placeholder="Enter Name." class={inputStyle} />
+    <input
+      bind:value={newName}
+      placeholder="Enter Name."
+      class={`${inputStyle} mt-3`} />
     <input
       bind:value={newAisle}
       placeholder="Enter Aisle."
@@ -92,7 +89,10 @@
       bind:value={newQuantity}
       placeholder="Enter Quantity."
       class={inputStyle} />
-    <textarea bind:value={newNote} class={inputStyle} placeholder="Note..." />
+    <textarea
+      bind:value={newNote}
+      class={`${inputStyle} mb-8`}
+      placeholder="Note..." />
   {/if}
   <div class="flex items-center justify-center">
     <button
