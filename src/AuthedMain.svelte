@@ -5,10 +5,7 @@
   import ItemContainer from './ItemContainer.svelte';
   import GroceryAPIResults from './GroceryAPIResults.svelte';
   import { items } from './stores/mainStore';
-  import {
-    sortAlpha,
-    sortNumeric,
-} from './helpers/sort';
+  import { sortAlpha, sortNumeric } from './helpers/sort';
 
   export let user;
 
@@ -124,7 +121,7 @@
 
   onMount(() => {
     updateItemsFromCookie();
-});
+  });
 </script>
 
 <style>
@@ -136,14 +133,20 @@
 <div class="authed-main">
   <div class="mb-10">
     {#if user}
-    <p>Hello, <span class="font-bold">{user.name}</span></p>
-    <button class="destructive-button mb-0 text-white" on:click={logOut}>
-      Log Out
-    </button>
+      <p>
+        Hello,
+        <span class="font-bold">{user.name}</span>
+      </p>
+      <button class="destructive-button mb-0 text-white" on:click={logOut}>
+        Log Out
+      </button>
     {/if}
 
     {#if itemsCount > 0}
-      <p>You have {itemsCount} {itemsCount > 1 ? 'items' : 'item'} on your list. {itemsInCart} {itemsInCart !== 1 ? 'items are' : 'item is'} in your cart now.</p>
+      <p>
+        You have {itemsCount} {itemsCount > 1 ? 'items' : 'item'} on your list. {itemsInCart}
+        {itemsInCart !== 1 ? 'items are' : 'item is'} in your cart now.
+      </p>
     {:else}
       <p>There are no items on your list. Please add one now.</p>
     {/if}
@@ -152,13 +155,16 @@
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
   <div class="flex justify-center items-center mb-2 flex-col md:flex-row">
-    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="destructive-button text-white mb-3 md:mb-0 md:mr-4">
+    <button
+      on:click={deleteAllItems}
+      disabled={itemsCount === 0}
+      class="destructive-button text-white mb-3 md:mb-0 md:mr-4">
       Delete All Items
     </button>
     <span class="mr-0 mb-3 md:mr-4 md:mb-0">Sort By:</span>
     <select bind:value={sortState} class="mb-0">
       {#each sortOptions as { name, value }}
-        <option value={value}>{name}</option>
+        <option {value}>{name}</option>
       {/each}
     </select>
   </div>
@@ -166,7 +172,7 @@
     <h4>My Store:</h4>
     {#each groceryStores as { name, value }}
       <label class="cursor-pointer">
-        <input type="radio" value={value} bind:group={selectedGroceryStore} />
+        <input type="radio" {value} bind:group={selectedGroceryStore} />
         {name}
       </label>
     {/each}
@@ -174,26 +180,37 @@
   <div class="authed-main-items-container">
     {#if sortState === 'alpha'}
       {#each sortAlpha($items, 'name') as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
+        <ItemContainer
+          {...item}
+          on:deleteItem={deleteItem}
+          on:updateItem={updateItem}
+          on:showToast
+          {link} />
       {/each}
     {:else if sortState === 'aisle'}
       {#each sortNumeric($items, 'aisle') as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
+        <ItemContainer
+          {...item}
+          on:deleteItem={deleteItem}
+          on:updateItem={updateItem}
+          on:showToast
+          {link} />
       {/each}
     {:else if sortState === 'date'}
       {#each sortNumeric($items, 'id') as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
+        <ItemContainer
+          {...item}
+          on:deleteItem={deleteItem}
+          on:updateItem={updateItem}
+          on:showToast
+          {link} />
       {/each}
     {/if}
   </div>
   {#if !groceryDataPromise}
-    <button on:click={showRedditData}>
-      Show Reddit Data!
-    </button>
+    <button on:click={showRedditData}>Show Reddit Data!</button>
   {:else}
-    <button on:click={hideRedditData}>
-      Hide Reddit Data
-    </button>
+    <button on:click={hideRedditData}>Hide Reddit Data</button>
   {/if}
   {#await groceryDataPromise}
     <p>Loading...</p>
@@ -203,4 +220,3 @@
     <p>Error loading Reddit grocery store data: {error.message || error}</p>
   {/await}
 </div>
-
