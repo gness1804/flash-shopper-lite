@@ -32,7 +32,7 @@
     "start:open": "node ./scripts/start.js --open",
     "lint": "node_modules/.bin/eslint --ext .js,.svelte  src scripts",
     "reset": "npm prune && npm install",
-    "prettier": "prettier --write --plugin-search-dir=. ./**/*.svelte ./**/*.html ./**/*.js",
+    "prettier": "prettier --write --plugin-search-dir=. ./**/*.svelte ./**/*.html ./**/*.js preCommit.js",
     "deploy": "now"
   },
   "dependencies": {
