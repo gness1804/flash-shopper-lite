@@ -20,7 +20,7 @@
 
   const inputStyle = 'block mt-0 mx-auto mb-3';
 
-  const buttonStyle = 'mr-2 lg:mr-5';
+  const buttonStyle = 'mr-2 lg:mr-5 hover:border-black';
 
   const deleteItem = () => {
     dispatch('deleteItem', id);

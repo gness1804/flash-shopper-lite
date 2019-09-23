@@ -59,7 +59,7 @@
     </div>
     <button
       on:click|preventDefault={handleSubmit}
-      class="block mx-auto my-0"
+      class="block mx-auto my-0 hover:border-black"
       disabled={!name}>
       Submit
     </button>
