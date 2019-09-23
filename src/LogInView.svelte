@@ -28,6 +28,7 @@
       placeholder="Enter Name"
       type="text"
       bind:value={user.name}
+      class="user-name-input"
       autocomplete="username" />
   </label>
 
@@ -37,11 +38,11 @@
       type="password"
       bind:value={user.password}
       autocomplete="current-password"
-      class="mb-0" />
+      class="mb-0 password-input" />
   </label>
 
   {#if errorMessage}
-    <p class="text-red-700">{errorMessage}</p>
+    <p class="text-red-700 error-message-display">{errorMessage}</p>
   {/if}
 
   <button on:click={logIn} class="bg-green-600 text-white">Log In</button>
