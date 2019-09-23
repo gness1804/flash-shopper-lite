@@ -1,14 +1,11 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte';
   import * as Cookies from 'js-cookie';
   import ItemInput from './ItemInput.svelte';
   import ItemContainer from './ItemContainer.svelte';
   import GroceryAPIResults from './GroceryAPIResults.svelte';
   import { items } from './stores/mainStore';
-  import {
-    sortAlpha,
-    sortNumeric,
-} from './helpers/sort';
+  import { sortAlpha, sortNumeric } from './helpers/sort';
 
   export let user;
 
@@ -56,6 +53,12 @@
       value: 'kroger',
     },
   ];
+
+  const dispatch = createEventDispatcher();
+
+  const logOut = () => {
+    dispatch('logOut');
+  };
 
   const updateItemsCookie = () => {
     Cookies.remove('svelteItems');
@@ -118,53 +121,32 @@
 
   onMount(() => {
     updateItemsFromCookie();
-});
+  });
 </script>
 
 <style>
-  .authed-main-top-message-container {
-    margin-bottom: 40px;
-  }
-
-  .authed-main-delete-all-items-button {
+  .destructive-button {
     background-color: #f00;
-    color: #fff;
-    margin-bottom: 0;
-    margin-right: 10px;
-  }
-
-  .authed-main-my-store-selector-container {
-    margin-bottom: 40px;
-  }
-
-  .authed-main-controls-top-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-
-  .authed-main-sort-type-selector {
-     margin-bottom: 0;
-  }
-
-  .authed-main-sort-type-label {
-    margin-right: 10px;
-  }
-
-  .authed-main-my-store-selector-label:hover {
-    cursor: pointer;
   }
 </style>
 
 <div class="authed-main">
-  <div class="authed-main-top-message-container">
+  <div class="mb-10">
     {#if user}
-    <p>Hello, {user.name}</p>
+      <p>
+        Hello,
+        <span class="font-bold">{user.name}</span>
+      </p>
+      <button class="destructive-button mb-0 text-white" on:click={logOut}>
+        Log Out
+      </button>
     {/if}
 
     {#if itemsCount > 0}
-      <p>You have {itemsCount} {itemsCount > 1 ? 'items' : 'item'} on your list. {itemsInCart} {itemsInCart !== 1 ? 'items are' : 'item is'} in your cart now.</p>
+      <p>
+        You have {itemsCount} {itemsCount > 1 ? 'items' : 'item'} on your list. {itemsInCart}
+        {itemsInCart !== 1 ? 'items are' : 'item is'} in your cart now.
+      </p>
     {:else}
       <p>There are no items on your list. Please add one now.</p>
     {/if}
@@ -172,22 +154,25 @@
   <ItemInput on:addItem={addItem} on:showToast>
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
-  <div class="authed-main-controls-top-container">
-    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="authed-main-delete-all-items-button">
+  <div class="flex justify-center items-center mb-2 flex-col md:flex-row">
+    <button
+      on:click={deleteAllItems}
+      disabled={itemsCount === 0}
+      class="destructive-button text-white mb-3 md:mb-0 md:mr-4">
       Delete All Items
     </button>
-    <span class="authed-main-sort-type-label">Sort By:</span>
-    <select bind:value={sortState} class="authed-main-sort-type-selector">
+    <span class="mr-0 mb-3 md:mr-4 md:mb-0">Sort By:</span>
+    <select bind:value={sortState} class="mb-0">
       {#each sortOptions as { name, value }}
-        <option value={value}>{name}</option>
+        <option {value}>{name}</option>
       {/each}
     </select>
   </div>
-  <div class="authed-main-my-store-selector-container">
+  <div class="mb-10">
     <h4>My Store:</h4>
     {#each groceryStores as { name, value }}
-      <label class="authed-main-my-store-selector-label">
-        <input type="radio" value={value} bind:group={selectedGroceryStore} />
+      <label class="cursor-pointer">
+        <input type="radio" {value} bind:group={selectedGroceryStore} />
         {name}
       </label>
     {/each}
@@ -195,26 +180,39 @@
   <div class="authed-main-items-container">
     {#if sortState === 'alpha'}
       {#each sortAlpha($items, 'name') as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
+        <ItemContainer
+          {...item}
+          on:deleteItem={deleteItem}
+          on:updateItem={updateItem}
+          on:showToast
+          {link} />
       {/each}
     {:else if sortState === 'aisle'}
       {#each sortNumeric($items, 'aisle') as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
+        <ItemContainer
+          {...item}
+          on:deleteItem={deleteItem}
+          on:updateItem={updateItem}
+          on:showToast
+          {link} />
       {/each}
     {:else if sortState === 'date'}
       {#each sortNumeric($items, 'id') as item (item.id)}
-        <ItemContainer {...item} on:deleteItem={deleteItem} on:updateItem={updateItem} on:showToast {link}/>
+        <ItemContainer
+          {...item}
+          on:deleteItem={deleteItem}
+          on:updateItem={updateItem}
+          on:showToast
+          {link} />
       {/each}
     {/if}
   </div>
   {#if !groceryDataPromise}
-    <button on:click={showRedditData}>
+    <button class="hover:border-black" on:click={showRedditData}>
       Show Reddit Data!
     </button>
   {:else}
-    <button on:click={hideRedditData}>
-      Hide Reddit Data
-    </button>
+    <button on:click={hideRedditData}>Hide Reddit Data</button>
   {/if}
   {#await groceryDataPromise}
     <p>Loading...</p>
@@ -224,4 +222,3 @@
     <p>Error loading Reddit grocery store data: {error.message || error}</p>
   {/await}
 </div>
-

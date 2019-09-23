@@ -1,4 +1,10 @@
-# svelte app
+# Flash Shopper Lite
+
+This is a lite version of my Flash Shopper app built in Svelte. [Check it out live!](https://svelte-app.grahamnessler.now.sh/)
+
+## Building
+
+This app was built using the Svelte starter template. See below for details:
 
 This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template-webpack.
 

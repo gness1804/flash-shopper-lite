@@ -1,130 +1,117 @@
-  <script>
-    import { createEventDispatcher } from 'svelte';
+<script>
+  import { createEventDispatcher } from 'svelte';
 
-    let editMode = false;
+  let editMode = false;
 
-    export let name;
-    export let aisle;
-    export let quantity;
-    export let note;
-    export let inCart;
-    export let id;
-    export let link;
+  export let name;
+  export let aisle;
+  export let quantity;
+  export let note;
+  export let inCart;
+  export let id;
+  export let link;
 
-    let newName = name;
-    let newAisle = aisle;
-    let newQuantity = quantity;
-    let newNote = note;
+  let newName = name;
+  let newAisle = aisle;
+  let newQuantity = quantity;
+  let newNote = note;
 
-    const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-    const deleteItem = () => {
-      dispatch('deleteItem', id);
-      dispatch('showToast', {
-        message: `${name} was successfully removed.`,
-      });
-    };
+  const inputStyle = 'block mt-0 mx-auto mb-3';
 
-    const toggleEdit = () => {
-      if (editMode) {
-        dispatch('updateItem', {
-          name: newName,
-          aisle: newAisle,
-          quantity: newQuantity,
-          note: newNote,
-          id,
-        });
-        dispatch('showToast', {
-          message: 'Changes saved.',
-        });
-      }
-      editMode = !editMode;
-    };
+  const buttonStyle = 'mr-2 lg:mr-5 hover:border-black';
 
-    const toggleInCart = () => {
+  const inCartStyle = 'text-gray-600 line-through';
+
+  const notInCartStyle = '';
+
+  const deleteItem = () => {
+    dispatch('deleteItem', id);
+    dispatch('showToast', {
+      message: `${name} was successfully removed.`,
+    });
+  };
+
+  const toggleEdit = () => {
+    if (editMode) {
       dispatch('updateItem', {
-        inCart: !inCart,
+        name: newName,
+        aisle: newAisle,
+        quantity: newQuantity,
+        note: newNote,
         id,
       });
-    };
+      dispatch('showToast', {
+        message: 'Changes saved.',
+      });
+    }
+    editMode = !editMode;
+  };
+
+  const toggleInCart = () => {
+    dispatch('updateItem', {
+      inCart: !inCart,
+      id,
+    });
+  };
 </script>
 
-  <style>
-  .item-container {
-    border: 2px solid #ece9e9;
-    max-width: 60vw;
-    margin: 0 auto 30px;
-  }
-
-  .item-container-name-display {
-    font-weight: 600;
-  }
-
-  .item-container-input {
-    display: block;
-    margin: 0 auto 10px;
-  }
-
-  .item-container-text-box {
-    margin: 0 auto 10px;
-    display: block;
-  }
-
-  .item-container-buttons-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .item-container-delete-button {
+<style>
+  .delete-button {
     background-color: #f00;
-    color: #fff;
   }
+</style>
 
-  .item-container-shopping-cart-icon {
-    height: 50px;
-  }
-
-  .icon {
-    margin-right: 8px;
-  }
-
-  .item-container-shopping-cart-icon:hover {
-    cursor: pointer;
-  }
-
-  .in-cart {
-    color:#b5b5bd;
-    text-decoration: line-through;
-  }
-  </style>
-
-<div class="item-container">
+<div class="border-2 border-solid border-gray-400 mt-0 mx-auto mb-8 max-w-md">
   {#if !editMode}
-    <p class="item-container-name-display" class:in-cart={inCart}>{name}</p>
+    <p
+      class={inCart ? `${inCartStyle} font-semibold` : `${notInCartStyle} font-semibold`}>
+      {name}
+    </p>
     {#if aisle}
-      <p class="item-container-aisle-display" class:in-cart={inCart}>Aisle: {aisle}</p>
+      <p class={inCart ? inCartStyle : notInCartStyle}>Aisle: {aisle}</p>
     {/if}
     {#if quantity}
-      <p class="item-container-quantity-display" class:in-cart={inCart}>Quantity: {quantity}</p>
+      <p class={inCart ? inCartStyle : notInCartStyle}>Quantity: {quantity}</p>
     {/if}
     {#if note}
-      <p class="item-container-note-display" class:in-cart={inCart}>Note: {note}</p>
+      <p class={inCart ? `${inCartStyle} mb-8` : `${notInCartStyle} mb-8`}>
+        Note: {note}
+      </p>
     {/if}
   {:else}
-    <input bind:value={newName} placeholder="Enter Name." class="item-container-input"/>
-    <input bind:value={newAisle} placeholder="Enter Aisle." class="item-container-input"/>
-    <input bind:value={newQuantity} placeholder="Enter Quantity." class="item-container-input"/>
-    <textarea bind:value={newNote} class="item-container-text-box" placeholder="Note..."></textarea>
+    <input
+      bind:value={newName}
+      placeholder="Enter Name."
+      class={`${inputStyle} mt-3`} />
+    <input
+      bind:value={newAisle}
+      placeholder="Enter Aisle."
+      class={inputStyle} />
+    <input
+      bind:value={newQuantity}
+      placeholder="Enter Quantity."
+      class={inputStyle} />
+    <textarea
+      bind:value={newNote}
+      class={`${inputStyle} mb-8`}
+      placeholder="Note..." />
   {/if}
-  <div class="item-container-buttons-container">
-    <button on:click={deleteItem} class="item-container-delete-button icon">
+  <div class="flex items-center justify-center">
+    <button
+      on:click={deleteItem}
+      class={`delete-button text-white ${buttonStyle}`}>
       X
     </button>
-    <button on:click={toggleEdit} class="icon">
-    {editMode ? 'Save' : 'Edit'}
+    <button on:click={toggleEdit} class={`${buttonStyle}`}>
+      {editMode ? 'Save' : 'Edit'}
     </button>
-    <img src="shopping_cart.svg" alt="Shopping cart." class="item-container-shopping-cart-icon icon" on:click={toggleInCart}/>
+    <img
+      src="shopping_cart.svg"
+      alt="Shopping cart."
+      class={`h-10 cursor-pointer ${buttonStyle}`}
+      on:click={toggleInCart} />
     <a href={link.replace(/{{query}}/, newName)} target="_blank">
       Store Search
     </a>
