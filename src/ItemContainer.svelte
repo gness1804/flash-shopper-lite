@@ -22,6 +22,10 @@
 
   const buttonStyle = 'mr-2 lg:mr-5 hover:border-black';
 
+  const inCartStyle = 'text-gray-600 line-through';
+
+  const notInCartStyle = '';
+
   const deleteItem = () => {
     dispatch('deleteItem', id);
     dispatch('showToast', {
@@ -57,24 +61,24 @@
   .delete-button {
     background-color: #f00;
   }
-
-  .in-cart {
-    color: #b5b5bd;
-    text-decoration: line-through;
-  }
 </style>
 
 <div class="border-2 border-solid border-gray-400 mt-0 mx-auto mb-8 max-w-md">
   {#if !editMode}
-    <p class="font-semibold" class:in-cart={inCart}>{name}</p>
+    <p
+      class={inCart ? `${inCartStyle} font-semibold` : `${notInCartStyle} font-semibold`}>
+      {name}
+    </p>
     {#if aisle}
-      <p class:in-cart={inCart}>Aisle: {aisle}</p>
+      <p class={inCart ? inCartStyle : notInCartStyle}>Aisle: {aisle}</p>
     {/if}
     {#if quantity}
-      <p class:in-cart={inCart}>Quantity: {quantity}</p>
+      <p class={inCart ? inCartStyle : notInCartStyle}>Quantity: {quantity}</p>
     {/if}
     {#if note}
-      <p class="mb-8" class:in-cart={inCart}>Note: {note}</p>
+      <p class={inCart ? `${inCartStyle} mb-8` : `${notInCartStyle} mb-8`}>
+        Note: {note}
+      </p>
     {/if}
   {:else}
     <input
