@@ -151,11 +151,11 @@
   <ItemInput on:addItem={addItem} on:showToast>
     <h2 slot="title">Add an Item!</h2>
   </ItemInput>
-  <div class="flex justify-center items-center mb-2">
-    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="destructive-button text-white mb-0 mr-2">
+  <div class="flex justify-center items-center mb-2 flex-col md:flex-row">
+    <button on:click={deleteAllItems} disabled={itemsCount === 0} class="destructive-button text-white mb-3 md:mb-0 md:mr-4">
       Delete All Items
     </button>
-    <span class="mr-2">Sort By:</span>
+    <span class="mr-0 mb-3 md:mr-4 md:mb-0">Sort By:</span>
     <select bind:value={sortState} class="mb-0">
       {#each sortOptions as { name, value }}
         <option value={value}>{name}</option>

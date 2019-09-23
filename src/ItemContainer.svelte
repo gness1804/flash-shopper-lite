@@ -20,6 +20,8 @@
 
     const inputStyle = 'block mt-0 mx-auto mb-3';
 
+    const buttonStyle = 'mr-2 lg:mr-5';
+
     const deleteItem = () => {
       dispatch('deleteItem', id);
       dispatch('showToast', {
@@ -81,13 +83,13 @@
     <textarea bind:value={newNote} class={inputStyle} placeholder="Note..."></textarea>
   {/if}
   <div class="flex items-center justify-center">
-    <button on:click={deleteItem} class="delete-button text-white mr-2">
+    <button on:click={deleteItem} class={`delete-button text-white ${buttonStyle}`}>
       X
     </button>
-    <button on:click={toggleEdit} class="mr-2">
+    <button on:click={toggleEdit} class={`${buttonStyle}`}>
     {editMode ? 'Save' : 'Edit'}
     </button>
-    <img src="shopping_cart.svg" alt="Shopping cart." class="h-10 mr-2 cursor-pointer" on:click={toggleInCart} />
+    <img src="shopping_cart.svg" alt="Shopping cart." class={`h-10 cursor-pointer ${buttonStyle}`} on:click={toggleInCart} />
     <a href={link.replace(/{{query}}/, newName)} target="_blank">
       Store Search
     </a>
