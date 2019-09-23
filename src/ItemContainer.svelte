@@ -20,7 +20,11 @@
 
   const inputStyle = 'block mt-0 mx-auto mb-3';
 
-  const buttonStyle = 'mr-2 lg:mr-5';
+  const buttonStyle = 'mr-2 lg:mr-5 hover:border-black';
+
+  const inCartStyle = 'text-gray-600 line-through';
+
+  const notInCartStyle = '';
 
   const deleteItem = () => {
     dispatch('deleteItem', id);
@@ -57,33 +61,30 @@
   .delete-button {
     background-color: #f00;
   }
-
-  .in-cart {
-    color: #b5b5bd;
-    text-decoration: line-through;
-  }
 </style>
 
 <div class="border-2 border-solid border-gray-400 mt-0 mx-auto mb-8 max-w-md">
   {#if !editMode}
-    <p class="font-semibold" class:in-cart={inCart}>{name}</p>
+    <p
+      class={inCart ? `${inCartStyle} font-semibold` : `${notInCartStyle} font-semibold`}>
+      {name}
+    </p>
     {#if aisle}
-      <p class="item-container-aisle-display" class:in-cart={inCart}>
-        Aisle: {aisle}
-      </p>
+      <p class={inCart ? inCartStyle : notInCartStyle}>Aisle: {aisle}</p>
     {/if}
     {#if quantity}
-      <p class="item-container-quantity-display" class:in-cart={inCart}>
-        Quantity: {quantity}
-      </p>
+      <p class={inCart ? inCartStyle : notInCartStyle}>Quantity: {quantity}</p>
     {/if}
     {#if note}
-      <p class="item-container-note-display" class:in-cart={inCart}>
+      <p class={inCart ? `${inCartStyle} mb-8` : `${notInCartStyle} mb-8`}>
         Note: {note}
       </p>
     {/if}
   {:else}
-    <input bind:value={newName} placeholder="Enter Name." class={inputStyle} />
+    <input
+      bind:value={newName}
+      placeholder="Enter Name."
+      class={`${inputStyle} mt-3`} />
     <input
       bind:value={newAisle}
       placeholder="Enter Aisle."
@@ -92,7 +93,10 @@
       bind:value={newQuantity}
       placeholder="Enter Quantity."
       class={inputStyle} />
-    <textarea bind:value={newNote} class={inputStyle} placeholder="Note..." />
+    <textarea
+      bind:value={newNote}
+      class={`${inputStyle} mb-8`}
+      placeholder="Note..." />
   {/if}
   <div class="flex items-center justify-center">
     <button
