@@ -1,44 +1,7 @@
+const user = require('../fixtures/user');
+const items = require('../fixtures/items');
+
 describe('Advanced Flow with User and Items', () => {
-  const user = {
-    name: 'Test',
-    password: 'password',
-  };
-
-  const items = [
-    {
-      name: 'Bananas',
-      aisle: '15',
-      quantity: '2 bunches',
-      note: '',
-      inCart: false,
-      id: 1569374409096,
-    },
-    {
-      name: 'Cookies',
-      aisle: '',
-      quantity: '',
-      note: '',
-      inCart: false,
-      id: 1569370254356,
-    },
-    {
-      name: 'Ground beef',
-      aisle: '1.5',
-      quantity: '1 lb',
-      note: 'In meat section.',
-      inCart: false,
-      id: 1569374438855,
-    },
-    {
-      name: 'Apples',
-      aisle: '',
-      quantity: '2',
-      note: '',
-      inCart: false,
-      id: 1569374521481,
-    },
-  ];
-
   beforeEach(() => {
     cy.clearCookie('svelteUser');
     cy.clearCookie('svelteItems');
