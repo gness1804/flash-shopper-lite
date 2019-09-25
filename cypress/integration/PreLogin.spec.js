@@ -1,4 +1,4 @@
-describe('App Landing Page', () => {
+describe('App Login Flow', () => {
   it('Contains the correct header text', () => {
     cy.visit('/');
     cy.get('#app')

@@ -1,4 +1,4 @@
-describe('App - post-login', () => {
+describe('Item Entry Post-Login', () => {
   const user = {
     name: 'Test',
     password: 'password',
