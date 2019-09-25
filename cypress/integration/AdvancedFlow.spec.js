@@ -66,4 +66,30 @@ describe('Advanced Flow with User and Items', () => {
       }
     });
   });
+
+  it('deleting an item should leave 3 items in the DOM', () => {
+    cy.visit('/');
+
+    cy.get('.authed-main-items-container')
+      .find('.item-container .delete-button')
+      .each((elem, index) => {
+        if (index === 1) {
+          elem.click();
+        }
+      });
+
+    // asserting that three elements now exist in the DOM
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index, collection) => {
+        expect(collection.length).to.equal(3);
+      });
+
+    // asserting that the message to the user now shows 3 items on the list
+    cy.get('.user-info-display p').each((elem, index) => {
+      if (index === 1) {
+        expect(elem).to.contain('You have 3 items on your list.');
+      }
+    });
+  });
 });

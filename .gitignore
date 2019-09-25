@@ -102,4 +102,5 @@ public/*.gz
 # Cypress
 
 cypress/videos
+cypress/screenshots
 
