@@ -63,7 +63,9 @@
   }
 </style>
 
-<div class="border-2 border-solid border-gray-400 mt-0 mx-auto mb-8 max-w-md">
+<div
+  class="item-container border-2 border-solid border-gray-400 mt-0 mx-auto mb-8
+  max-w-md">
   {#if !editMode}
     <p
       class={inCart ? `${inCartStyle} font-semibold` : `${notInCartStyle} font-semibold`}>

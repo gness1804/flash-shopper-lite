@@ -15,7 +15,6 @@
   const handleLogin = ({ detail: { user: _user } }) => {
     user = _user;
     Cookies.remove('svelteUser');
-    console.log('user:', user);
     Cookies.set('svelteUser', user, { expires: 2 });
   };
 
