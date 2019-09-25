@@ -40,14 +40,13 @@ describe('Advanced Flow with User and Items', () => {
   ];
 
   beforeEach(() => {
+    cy.clearCookie('svelteUser');
+    cy.clearCookie('svelteItems');
     cy.setCookie('svelteUser', JSON.stringify(user));
     cy.setCookie('svelteItems', JSON.stringify(items));
   });
 
-  afterEach(() => {
-    cy.clearCookie('svelteUser');
-    cy.clearCookie('svelteItems');
-  });
+  afterEach(() => {});
 
   it('there should be four items in the DOM', () => {
     cy.visit('/');
@@ -67,15 +66,14 @@ describe('Advanced Flow with User and Items', () => {
     });
   });
 
-  // for some reason, this fails with 'cypress run'
-  it.skip('deleting an item should leave 3 items in the DOM', () => {
+  it('deleting an item should leave 3 items in the DOM', () => {
     cy.visit('/');
 
     cy.get('.authed-main-items-container')
       .find('.item-container .delete-button')
       .each((elem, index) => {
-        if (index === 1) {
-          elem.click();
+        if (index === 0) {
+          cy.get(elem).click();
         }
       });
 
