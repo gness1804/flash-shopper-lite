@@ -190,4 +190,19 @@ describe('Advanced Flow with User and Items', () => {
         });
     }, 5000);
   });
+
+  it('the store search links should be to HEB by default', () => {
+    cy.visit('/');
+
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        if (index === 0) {
+          cy.get(elem)
+            .find('a')
+            .should('have.attr', 'href')
+            .and('match', /www.heb.com/);
+        }
+      });
+  });
 });
