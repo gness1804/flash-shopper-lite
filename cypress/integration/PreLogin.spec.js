@@ -1,5 +1,10 @@
-describe('App Landing Page', () => {
-  it('Contains the correct footer text', () => {
+describe('App Login Flow', () => {
+  beforeEach(() => {
+    cy.clearCookie('svelteUser');
+    cy.clearCookie('svelteItems');
+  });
+
+  it('Contains the correct header text', () => {
     cy.visit('/');
     cy.get('#app')
       .find('#app-header')
