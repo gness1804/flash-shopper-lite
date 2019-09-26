@@ -73,6 +73,50 @@ describe('Advanced Flow with User and Items', () => {
     cy.get('.authed-main-items-container .item-container').should('not.exist');
   });
 
+  it('item should be sorted alphabetically by name by default', () => {
+    cy.visit('/');
+
+    setTimeout(() => {
+      cy.get('.authed-main-items-container')
+        .find('.item-container')
+        .each((elem, index) => {
+          if (index === 0) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 0) {
+                  expect(_elem).to.have.text('Apples');
+                }
+              });
+          } else if (index === 1) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 0) {
+                  expect(_elem).to.have.text('Bananas');
+                }
+              });
+          } else if (index === 2) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 0) {
+                  expect(_elem).to.have.text('Cookies');
+                }
+              });
+          } else if (index === 3) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 0) {
+                  expect(_elem).to.have.text('Ground Beef');
+                }
+              });
+          }
+        });
+    }, 5000);
+  });
+
   it('aisle sort works', () => {
     cy.visit('/');
     cy.get('select').select('aisle');
@@ -81,12 +125,28 @@ describe('Advanced Flow with User and Items', () => {
       cy.get('.authed-main-items-container')
         .find('.item-container')
         .each((elem, index) => {
-          if (index === 2) {
+          if (index === 0) {
             cy.get(elem)
               .find('p')
               .each((_elem, _index) => {
                 if (_index === 1) {
-                  expect(_elem).to.contain('Aisle: 1.5');
+                  _elem.should('not.exist');
+                }
+              });
+          } else if (index === 1) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 1) {
+                  _elem.should('not.exist');
+                }
+              });
+          } else if (index === 2) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 1) {
+                  expect(_elem).to.have.text('Aisle: 1.5');
                 }
               });
           } else if (index === 3) {
