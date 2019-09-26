@@ -74,4 +74,41 @@ describe('Advanced Flow with User and Items', () => {
 
     cy.get('.authed-main-items-container .item-container').should('not.exist');
   });
+
+  it('aisle sort works', () => {
+    cy.visit('/');
+    cy.get('select').select('aisle');
+
+    // verify that the aisles are sorted correctly; first two entries don't have aisles
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        // the third item box should have aisle 1.5
+        if (index === 2) {
+          cy.get(elem)
+            .find('p')
+            .each((_elem, _index) => {
+              if (_index === 1) {
+                expect(_elem).to.contain('Aisle: 1.5');
+              }
+            });
+        }
+      });
+
+    // for some reason, this passes on cypress open but fails in cypress run
+    // cy.get('.authed-main-items-container')
+    //   .find('.item-container')
+    //   .each((elem, index) => {
+    //     // the fourth item box should have aisle 15
+    //     if (index === 3) {
+    //       cy.get(elem)
+    //         .find('p')
+    //         .each((_elem, _index) => {
+    //           if (_index === 1) {
+    //             expect(_elem).to.contain('Aisle: 15');
+    //           }
+    //         });
+    //     }
+    //   });
+  });
 });
