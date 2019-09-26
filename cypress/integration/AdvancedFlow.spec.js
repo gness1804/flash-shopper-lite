@@ -205,4 +205,36 @@ describe('Advanced Flow with User and Items', () => {
         }
       });
   });
+
+  it('the store search links should be to Wal-Mart when user switches the toggle to Wal-Mart', () => {
+    cy.visit('/');
+    cy.get('[type="radio"]').check('walmart');
+
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        if (index === 0) {
+          cy.get(elem)
+            .find('a')
+            .should('have.attr', 'href')
+            .and('match', /www.walmart.com/);
+        }
+      });
+  });
+
+  it('the store search links should be to Kroger when user switches the toggle to Kroger', () => {
+    cy.visit('/');
+    cy.get('[type="radio"]').check('kroger');
+
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        if (index === 0) {
+          cy.get(elem)
+            .find('a')
+            .should('have.attr', 'href')
+            .and('match', /www.kroger.com/);
+        }
+      });
+  });
 });
