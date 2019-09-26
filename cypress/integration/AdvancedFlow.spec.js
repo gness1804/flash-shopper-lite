@@ -83,7 +83,6 @@ describe('Advanced Flow with User and Items', () => {
     cy.get('.authed-main-items-container')
       .find('.item-container')
       .each((elem, index) => {
-        // the third item box should have aisle 1.5
         if (index === 2) {
           cy.get(elem)
             .find('p')
@@ -92,23 +91,15 @@ describe('Advanced Flow with User and Items', () => {
                 expect(_elem).to.contain('Aisle: 1.5');
               }
             });
+        } else if (index === 4) {
+          cy.get(elem)
+            .find('p')
+            .each((_elem, _index) => {
+              if (_index === 1) {
+                expect(_elem).to.have.text('Aisle: 15');
+              }
+            });
         }
       });
-
-    // for some reason, this passes on cypress open but fails in cypress run
-    // cy.get('.authed-main-items-container')
-    //   .find('.item-container')
-    //   .each((elem, index) => {
-    //     // the fourth item box should have aisle 15
-    //     if (index === 3) {
-    //       cy.get(elem)
-    //         .find('p')
-    //         .each((_elem, _index) => {
-    //           if (_index === 1) {
-    //             expect(_elem).to.contain('Aisle: 15');
-    //           }
-    //         });
-    //     }
-    //   });
   });
 });
