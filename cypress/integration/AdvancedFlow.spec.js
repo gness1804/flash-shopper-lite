@@ -304,4 +304,35 @@ describe('Advanced Flow with User and Items', () => {
         });
     }, 5000);
   });
+
+  it('clicking on the cart icon for an item toggles inCart status', () => {
+    cy.visit('/');
+
+    // click on the cart icon in the first item
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        if (index === 0) {
+          cy.get(elem)
+            .find('img')
+            .click();
+        }
+      });
+
+    // verify that the name in the first item is now struck out and gray
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        if (index === 0) {
+          cy.get(elem)
+            .find('p')
+            .each((_elem, _index) => {
+              if (_index === 0) {
+                expect(_elem).to.have.class('line-through');
+                expect(_elem).to.have.class('text-gray-600');
+              }
+            });
+        }
+      });
+  });
 });
