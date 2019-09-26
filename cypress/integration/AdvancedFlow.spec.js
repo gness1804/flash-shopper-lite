@@ -19,6 +19,22 @@ describe('Advanced Flow with User and Items', () => {
     });
   });
 
+  it('submit button should be enabled when there are dirty changes in the main input fields', () => {
+    cy.visit('/');
+
+    cy.get('input').each((elem, index) => {
+      if (index === 0) {
+        cy.get(elem).type('Whole wheat bread');
+      }
+    });
+
+    cy.get('button').each((elem, index) => {
+      if (index === 1) {
+        expect(elem).to.have.prop('disabled', false);
+      }
+    });
+  });
+
   it('there should be four items in the DOM', () => {
     cy.visit('/');
 
