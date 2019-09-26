@@ -9,6 +9,16 @@ describe('Advanced Flow with User and Items', () => {
     cy.setCookie('svelteItems', JSON.stringify(items));
   });
 
+  it('submit button should be disabled by default', () => {
+    cy.visit('/');
+
+    cy.get('button').each((elem, index) => {
+      if (index === 1) {
+        expect(elem).to.have.prop('disabled', true);
+      }
+    });
+  });
+
   it('there should be four items in the DOM', () => {
     cy.visit('/');
 
