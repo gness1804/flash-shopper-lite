@@ -9,8 +9,6 @@ describe('Advanced Flow with User and Items', () => {
     cy.setCookie('svelteItems', JSON.stringify(items));
   });
 
-  afterEach(() => {});
-
   it('there should be four items in the DOM', () => {
     cy.visit('/');
 
@@ -79,27 +77,57 @@ describe('Advanced Flow with User and Items', () => {
     cy.visit('/');
     cy.get('select').select('aisle');
 
-    // verify that the aisles are sorted correctly; first two entries don't have aisles
-    cy.get('.authed-main-items-container')
-      .find('.item-container')
-      .each((elem, index) => {
-        if (index === 2) {
-          cy.get(elem)
-            .find('p')
-            .each((_elem, _index) => {
-              if (_index === 1) {
-                expect(_elem).to.contain('Aisle: 1.5');
-              }
-            });
-        } else if (index === 4) {
-          cy.get(elem)
-            .find('p')
-            .each((_elem, _index) => {
-              if (_index === 1) {
-                expect(_elem).to.have.text('Aisle: 15');
-              }
-            });
-        }
-      });
+    setTimeout(() => {
+      cy.get('.authed-main-items-container')
+        .find('.item-container')
+        .each((elem, index) => {
+          if (index === 2) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 1) {
+                  expect(_elem).to.contain('Aisle: 1.5');
+                }
+              });
+          } else if (index === 3) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 1) {
+                  expect(_elem).to.have.text('Aisle: 15');
+                }
+              });
+          }
+        });
+    }, 5000);
+  });
+
+  it('date added sort works', () => {
+    cy.visit('/');
+    cy.get('select').select('date');
+
+    setTimeout(() => {
+      cy.get('.authed-main-items-container')
+        .find('.item-container')
+        .each((elem, index) => {
+          if (index === 0) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 0) {
+                  expect(_elem).to.have.text('Cookies');
+                }
+              });
+          } else if (index === 1) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 0) {
+                  expect(_elem).to.have.text('Bananas');
+                }
+              });
+          }
+        });
+    }, 5000);
   });
 });
