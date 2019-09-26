@@ -361,4 +361,20 @@ describe('Advanced Flow with User and Items', () => {
         }
       });
   });
+
+  it('clicking on the logout button should log the user out', () => {
+    cy.visit('/');
+
+    // click on the logout button
+    cy.get('button').each((elem, index) => {
+      if (index === 0) {
+        cy.get(elem).click();
+      }
+    });
+
+    // verify that there is now a Log In button showing up in the DOM
+    cy.get('#app')
+      .find('button')
+      .then(elem => expect(elem).to.have.text('Log In'));
+  });
 });
