@@ -237,4 +237,71 @@ describe('Advanced Flow with User and Items', () => {
         }
       });
   });
+
+  it('the edit button works for each item', () => {
+    cy.visit('/');
+
+    // click on the edit button in the item container
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        if (index === 0) {
+          cy.get(elem)
+            .find('button')
+            .each((_elem, _index) => {
+              if (_index === 1) {
+                _elem.click();
+              }
+            });
+        }
+      });
+
+    // clear the first input field and replace with 'Caramel apples'
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        if (index === 0) {
+          cy.get(elem)
+            .find('input')
+            .each((_elem, _index) => {
+              if (_index === 0) {
+                cy.get(_elem).clear();
+                cy.get(_elem).type('Caramel apples');
+              }
+            });
+        }
+      });
+
+    // click on the save button in the item container
+    cy.get('.authed-main-items-container')
+      .find('.item-container')
+      .each((elem, index) => {
+        if (index === 0) {
+          cy.get(elem)
+            .find('button')
+            .each((_elem, _index) => {
+              if (_index === 1) {
+                _elem.click();
+              }
+            });
+        }
+      });
+
+    // verify that the SECOND item's name is now 'Caramel apples' (order changed with auto sort)
+    setTimeout(() => {
+      cy.get('.authed-main-items-container')
+        .find('.item-container')
+        .each((elem, index) => {
+          if (index === 1) {
+            cy.get(elem)
+              .find('p')
+              .each((_elem, _index) => {
+                if (_index === 0) {
+                  expect(_elem).to.have.text('Caramel apples');
+                }
+              });
+          }
+        });
+    }, 5000);
+  });
 });
