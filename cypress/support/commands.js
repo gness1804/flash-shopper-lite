@@ -11,7 +11,34 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add("login", (email, password) => { ... })
-//
+
+const user = require('../fixtures/user');
+const items = require('../fixtures/items');
+
+Cypress.Commands.add('prep', fileName => {
+  switch (fileName) {
+    case 'PreLogin':
+      cy.clearCookie('svelteUser');
+      cy.clearCookie('svelteItems');
+      break;
+    case 'ItemEntry':
+      cy.clearCookie('svelteUser');
+      cy.clearCookie('svelteItems');
+      cy.setCookie('svelteUser', JSON.stringify(user));
+      break;
+    case 'AdvancedFlow':
+      cy.clearCookie('svelteUser');
+      cy.clearCookie('svelteItems');
+      cy.setCookie('svelteUser', JSON.stringify(user));
+      cy.setCookie('svelteItems', JSON.stringify(items));
+      break;
+    default:
+      cy.clearCookie('svelteUser');
+      cy.clearCookie('svelteItems');
+      break;
+  }
+});
+
 //
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })

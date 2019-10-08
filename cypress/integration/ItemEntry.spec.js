@@ -1,10 +1,6 @@
-const user = require('../fixtures/user');
-
 describe('Item Entry Post-Login', () => {
   beforeEach(() => {
-    cy.clearCookie('svelteUser');
-    cy.clearCookie('svelteItems');
-    cy.setCookie('svelteUser', JSON.stringify(user));
+    cy.prep('ItemEntry');
   });
 
   it('displays the Log Out and Delete All Items buttons', () => {

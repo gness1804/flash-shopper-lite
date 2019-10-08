@@ -1,12 +1,6 @@
-const user = require('../fixtures/user');
-const items = require('../fixtures/items');
-
 describe('Advanced Flow with User and Items', () => {
   beforeEach(() => {
-    cy.clearCookie('svelteUser');
-    cy.clearCookie('svelteItems');
-    cy.setCookie('svelteUser', JSON.stringify(user));
-    cy.setCookie('svelteItems', JSON.stringify(items));
+    cy.prep('AdvancedFlow');
   });
 
   it('submit button should be disabled by default', () => {

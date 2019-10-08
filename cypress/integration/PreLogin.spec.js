@@ -1,7 +1,6 @@
 describe('App Login Flow', () => {
   beforeEach(() => {
-    cy.clearCookie('svelteUser');
-    cy.clearCookie('svelteItems');
+    cy.prep('PreLogin');
   });
 
   it('Contains the correct header text', () => {
