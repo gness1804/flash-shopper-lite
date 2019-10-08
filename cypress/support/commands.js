@@ -20,6 +20,7 @@ Cypress.Commands.add('prep', fileName => {
     case 'PreLogin':
       cy.clearCookie('svelteUser');
       cy.clearCookie('svelteItems');
+      cy.visit('/');
       break;
     case 'ItemEntry':
       cy.clearCookie('svelteUser');
