@@ -4,24 +4,17 @@ describe('Item Entry Post-Login', () => {
   });
 
   it('displays the Log Out and Delete All Items buttons', () => {
-    cy.visit('/');
-    cy.get('.destructive-button').each((elem, index) => {
-      if (index === 0) {
-        expect(elem).to.contain('Log Out');
-      } else if (index === 1) {
-        expect(elem).to.contain('Delete All Items');
-      }
-    });
+    cy.get('.logout-button').then(elem =>
+      cy.get(elem).should('have.text', 'Log Out'),
+    );
+    cy.get('.delete-all-items-button').then(elem =>
+      cy.get(elem).should('have.text', 'Delete All Items'),
+    );
   });
 
   it('adding an item via the input field should add an item to the UI', () => {
-    cy.visit('/');
-    cy.get('form input').each((elem, index) => {
-      if (index === 0) {
-        cy.get(elem).type('Bananas');
-      }
-    });
-    cy.get('form button').click();
+    cy.get('.name-input-main').type('Bananas');
+    cy.get('.submit-button').click();
 
     // asserting that the item's box now exists in the DOM
     cy.get('.authed-main-items-container')
@@ -32,16 +25,14 @@ describe('Item Entry Post-Login', () => {
           expect(elem).to.exist;
           /* eslint-enable no-unused-expressions */
           cy.get(elem)
-            .find('p')
+            .find('.item-name-display')
             .then(_elem => expect(_elem).to.contain('Bananas'));
         }
       });
 
     // asserting that the message to the user now shows 1 item on the list
-    cy.get('.user-info-display p').each((elem, index) => {
-      if (index === 1) {
-        expect(elem).to.contain('You have 1 item on your list.');
-      }
-    });
+    cy.get('.items-count-display').then(elem =>
+      expect(elem).to.contain('You have 1 item on your list.'),
+    );
   });
 });

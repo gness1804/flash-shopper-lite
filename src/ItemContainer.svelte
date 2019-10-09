@@ -57,18 +57,11 @@
   };
 </script>
 
-<style>
-  .delete-button {
-    background-color: #f00;
-  }
-</style>
-
 <div
   class="item-container border-2 border-solid border-gray-400 mt-0 mx-auto mb-8
   max-w-md">
   {#if !editMode}
-    <p
-      class={inCart ? `${inCartStyle} font-semibold` : `${notInCartStyle} font-semibold`}>
+    <p class={`item-name-display font-semibold ${inCart ? inCartStyle : ''}`}>
       {name}
     </p>
     {#if aisle}
@@ -103,7 +96,7 @@
   <div class="flex items-center justify-center">
     <button
       on:click={deleteItem}
-      class={`delete-button text-white ${buttonStyle}`}>
+      class={`bg-red-600 text-white ${buttonStyle}`}>
       X
     </button>
     <button on:click={toggleEdit} class={`${buttonStyle}`}>

@@ -44,22 +44,25 @@
       <input
         placeholder="Enter name of item."
         bind:value={name}
-        class="block mx-auto" />
+        class="name-input-main block mx-auto" />
       <input
         placeholder="Enter aisle of item."
         bind:value={aisle}
-        class="block mx-auto" />
+        class="aisle-input-main block mx-auto" />
     </div>
     <div class="flex flex-col mb-6 lg:flex-row">
       <input
         placeholder="Enter quantity of item."
         bind:value={quantity}
-        class="block mx-auto" />
-      <textarea bind:value={note} class="mx-auto" placeholder="Note..." />
+        class="quantity-input-main block mx-auto" />
+      <textarea
+        bind:value={note}
+        class="note-input-main mx-auto"
+        placeholder="Note..." />
     </div>
     <button
       on:click|preventDefault={handleSubmit}
-      class="block mx-auto my-0 hover:border-black"
+      class="submit-button block mx-auto my-0 hover:border-black"
       disabled={!name}>
       Submit
     </button>

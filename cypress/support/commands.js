@@ -26,6 +26,7 @@ Cypress.Commands.add('prep', fileName => {
       cy.clearCookie('svelteUser');
       cy.clearCookie('svelteItems');
       cy.setCookie('svelteUser', JSON.stringify(user));
+      cy.visit('/');
       break;
     case 'AdvancedFlow':
       cy.clearCookie('svelteUser');
