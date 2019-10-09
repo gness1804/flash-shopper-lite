@@ -1,5 +1,7 @@
 # Flash Shopper Lite
 
+Version: 1.0.1
+
 This is a lite version of my Flash Shopper app built in Svelte. [Check it out live!](https://svelte-app.grahamnessler.now.sh/)
 
 ## Building
@@ -15,8 +17,7 @@ npx degit sveltejs/template-webpack svelte-app
 cd svelte-app
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
+_Note that you will need to have [Node.js](https://nodejs.org) installed._
 
 ## Get started
 
@@ -34,7 +35,6 @@ npm run dev
 ```
 
 Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and the page should reload with your changes.
-
 
 ## Deploying to the web
 
