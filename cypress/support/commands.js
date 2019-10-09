@@ -33,12 +33,18 @@ Cypress.Commands.add('prep', fileName => {
       cy.clearCookie('svelteItems');
       cy.setCookie('svelteUser', JSON.stringify(user));
       cy.setCookie('svelteItems', JSON.stringify(items));
+      cy.visit('/');
       break;
     default:
       cy.clearCookie('svelteUser');
       cy.clearCookie('svelteItems');
       break;
   }
+});
+
+// get the container box for each item in the list
+Cypress.Commands.add('getItemContainers', () => {
+  cy.get('.authed-main-items-container').find('.item-container');
 });
 
 //

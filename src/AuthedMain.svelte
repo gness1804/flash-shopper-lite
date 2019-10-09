@@ -160,7 +160,7 @@
       Delete All Items
     </button>
     <span class="mr-0 mb-3 md:mr-4 md:mb-0">Sort By:</span>
-    <select bind:value={sortState} class="mb-0">
+    <select bind:value={sortState} class="sort-selector mb-0">
       {#each sortOptions as { name, value }}
         <option {value}>{name}</option>
       {/each}

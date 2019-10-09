@@ -23,7 +23,7 @@ describe('App Login Flow', () => {
     cy.get('.user-name-input').type('Test');
     cy.get('.password-input').type('password');
 
-    cy.get('button').click();
+    cy.get('.login-button').click();
     cy.get('.user-info-display p').then(elem =>
       expect(elem).to.contain('Hello'),
     );
