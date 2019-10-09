@@ -124,12 +124,6 @@
   });
 </script>
 
-<style>
-  .destructive-button {
-    background-color: #f00;
-  }
-</style>
-
 <div class="authed-main">
   <div class="mb-10 user-info-display">
     {#if user}
@@ -137,18 +131,22 @@
         Hello,
         <span class="font-bold">{user.name}</span>
       </p>
-      <button class="destructive-button mb-0 text-white" on:click={logOut}>
+      <button
+        class="logout-button bg-red-600 mb-0 text-white"
+        on:click={logOut}>
         Log Out
       </button>
     {/if}
 
     {#if itemsCount > 0}
-      <p>
+      <p class="items-count-display">
         You have {itemsCount} {itemsCount > 1 ? 'items' : 'item'} on your list. {itemsInCart}
         {itemsInCart !== 1 ? 'items are' : 'item is'} in your cart now.
       </p>
     {:else}
-      <p>There are no items on your list. Please add one now.</p>
+      <p class="no-items-message">
+        There are no items on your list. Please add one now.
+      </p>
     {/if}
   </div>
   <ItemInput on:addItem={addItem} on:showToast>
@@ -158,11 +156,11 @@
     <button
       on:click={deleteAllItems}
       disabled={itemsCount === 0}
-      class="destructive-button text-white mb-3 md:mb-0 md:mr-4">
+      class="delete-all-items-button bg-red-600 text-white mb-3 md:mb-0 md:mr-4">
       Delete All Items
     </button>
     <span class="mr-0 mb-3 md:mr-4 md:mb-0">Sort By:</span>
-    <select bind:value={sortState} class="mb-0">
+    <select bind:value={sortState} class="sort-selector mb-0">
       {#each sortOptions as { name, value }}
         <option {value}>{name}</option>
       {/each}

@@ -45,5 +45,7 @@
     <p class="text-red-700 error-message-display">{errorMessage}</p>
   {/if}
 
-  <button on:click={logIn} class="bg-green-600 text-white">Log In</button>
+  <button on:click={logIn} class="login-button bg-green-600 text-white">
+    Log In
+  </button>
 </form>
