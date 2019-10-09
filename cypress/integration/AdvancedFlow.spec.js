@@ -199,4 +199,14 @@ describe('Advanced Flow with User and Items', () => {
       .should('exist')
       .and('have.text', 'Log In');
   });
+
+  it('clicking on the Reddit button should load the Reddit data', () => {
+    cy.get('.reddit-data-button').click();
+    cy.get('.grocery-api-results-heading')
+      .should('exist')
+      .and('have.text', 'What are grocery shoppers on Reddit interested in?');
+    cy.get('.reddit-result-link').then(list =>
+      expect(list.length).to.be.greaterThan(0),
+    );
+  });
 });

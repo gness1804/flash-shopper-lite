@@ -17,7 +17,9 @@
 
 <div class="grocery-api-results">
   {#if parsedData && parsedData.data && parsedData.data.children}
-    <h2 class="mb-10">What are grocery shoppers on Reddit interested in?</h2>
+    <h2 class="grocery-api-results-heading mb-10">
+      What are grocery shoppers on Reddit interested in?
+    </h2>
     <div class="flex items-center justify-center mb-10">
       <button on:click={() => (sortType = 'alpha')} class="my-0 mx-1">
         Sort Alpha
@@ -34,7 +36,7 @@
         <a
           href={`https://reddit.com${_data.permalink}`}
           target="_blank"
-          class={linkStyle}
+          class={`reddit-result-link ${linkStyle}`}
           title={_data.title}>
           {_data.title}
         </a>
@@ -44,7 +46,7 @@
         <a
           href={`https://reddit.com${_data.permalink}`}
           target="_blank"
-          class={linkStyle}
+          class={`reddit-result-link ${linkStyle}`}
           title={_data.title}>
           {_data.title}
         </a>
@@ -54,7 +56,7 @@
         <a
           href={`https://reddit.com${_data.permalink}`}
           target="_blank"
-          class={linkStyle}
+          class={`reddit-result-link ${linkStyle}`}
           title={_data.title}>
           {_data.title}
         </a>
@@ -64,7 +66,7 @@
         <a
           href={`https://reddit.com${_data.permalink}`}
           target="_blank"
-          class={linkStyle}
+          class={`reddit-result-link ${linkStyle}`}
           title={_data.title}>
           {_data.title}
         </a>

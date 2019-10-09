@@ -206,7 +206,9 @@
     {/if}
   </div>
   {#if !groceryDataPromise}
-    <button class="hover:border-black" on:click={showRedditData}>
+    <button
+      class="reddit-data-button hover:border-black"
+      on:click={showRedditData}>
       Show Reddit Data!
     </button>
   {:else}
